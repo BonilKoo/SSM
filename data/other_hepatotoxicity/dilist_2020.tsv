@@ -1,0 +1,1280 @@
+DILIST_ID	CompoundName	DILIst_Classification	Routs_of_Administration
+1	mercaptopurine	1	Oral
+2	acetaminophen	1	Oral
+3	azathioprine	1	Oral
+4	chlorpheniramine	0	Oral
+5	clofibrate	1	Oral
+6	cyclophosphamide	1	Oral
+7	dopamine	0	Intravenous
+8	estradiol	1	Oral
+9	fluoxetine	1	Oral
+10	gemfibrozil	1	Oral
+11	indomethacin	1	Oral
+12	ketoprofen	1	Oral
+13	mannitol	0	Intravenous
+14	methotrexate	1	Oral
+15	phenobarbital	1	Oral
+16	phenytoin	1	Oral
+17	rifampin	1	Oral
+18	tetracycline	1	Oral
+19	abacavir	1	Oral
+20	aciclovir	1	Oral
+21	allopurinol	1	Oral
+22	amineptine	1	Oral
+23	amiodarone	1	Oral
+24	amitriptyline	1	Oral
+25	amphotericin b	1	Intravenous
+26	ampicillin	1	Oral
+27	donepezil	1	Oral
+28	aspirin	1	Oral
+29	aminohippurate	0	Intravenous
+30	bicalutamide	1	Oral
+31	bupropion	1	Oral
+32	captopril	1	Oral
+33	carbamazepine	1	Oral
+34	carboplatin	1	Intravenous
+35	ceftazidime	1	Intravenous
+36	chlorcyclizine	1	Oral
+37	chlorzoxazone	1	Oral
+38	chlorpromazine	1	Oral
+39	cisplatin	1	Intravenous
+40	dimercaprol	0	Intramuscular
+41	colchicine	0	Oral
+42	corticotropin	0	Subcutaneous
+43	dactinomycin	1	Subcutaneous
+44	dantrolene	1	Oral
+45	demeclocycline	0	Oral
+46	propoxyphene	1	Oral
+47	diclofenac	1	Oral
+48	diflunisal	1	Oral
+49	diphenhydramine	0	Oral
+50	epirubicin	0	Intravenous
+51	erythromycin	1	Oral
+52	etoposide	1	Oral
+53	famotidine	1	Oral
+54	felbamate	1	Oral
+55	fenofibrate	1	Oral
+56	fenoprofen	1	Oral
+57	flutamide	1	Oral
+58	hydroxyurea	1	Oral
+59	imatinib	1	Oral
+60	imipramine	1	Oral
+61	iproniazid	1	Oral
+62	ketoconazole	1	Oral
+63	labetalol	1	Oral
+64	leflunomide	1	Oral
+65	mefenamic acid	1	Oral
+66	meloxicam	1	Oral
+67	metformin	1	Oral
+68	methyldopa	1	Oral
+69	nefazodone	1	Oral
+70	nitrofurantoin	1	Oral
+71	olsalazine	1	Oral
+72	paroxetine	1	Oral
+73	pentamidine	1	Intravenous
+74	perhexiline	1	Oral
+75	physostigmine	0	Intravenous
+76	pioglitazone	1	Oral
+77	propylthiouracil	1	Oral
+78	pseudoephedrine	0	Oral
+79	ranitidine	1	Oral
+80	rifabutin	1	Oral
+81	rosiglitazone	1	Oral
+82	indocyanine green	0	Intravenous
+83	simvastatin	1	Oral
+84	spironolactone	1	Oral
+85	stavudine	1	Oral
+86	streptomycin	0	Intramuscular
+87	sulfadiazine	1	Oral
+88	sulfasalazine	1	Oral
+89	sulindac	1	Oral
+90	tamoxifen	1	Oral
+91	temozolomide	1	Oral
+92	theophylline	0	Oral
+93	tizanidine	1	Oral
+94	tolcapone	1	Oral
+95	valproic acid	1	Oral
+96	vancomycin	1	Oral
+97	vitamin a	1	Intramuscular
+98	zidovudine	1	Oral
+99	zolpidem	0	Oral
+100	zonisamide	1	Oral
+101	pyrazinamide	1	Oral
+102	finasteride	1	Oral
+103	troglitazone	1	Oral
+104	fluvastatin	1	Oral
+105	glimepiride	1	Oral
+106	venlafaxine	1	Oral
+107	amlodipine	1	Oral
+108	vinblastine	0	Intravenous
+109	ciprofloxacin	1	Oral
+110	fluconazole	1	Oral
+111	prednisone	1	Oral
+112	lorazepam	0	Oral
+113	itraconazole	1	Oral
+114	raloxifene	0	Oral
+115	mifepristone	0	Oral
+116	clomipramine	1	Oral
+117	pravastatin	1	Oral
+118	clarithromycin	1	Oral
+119	hydrocortisone	0	Oral
+120	progesterone	1	Oral
+121	ergocalciferol	0	Oral
+122	ibuprofen	1	Oral
+123	isoproterenol	0	Intravenous
+124	ketorolac	1	Oral
+125	promethazine	1	Oral
+126	omeprazole	1	Oral
+127	carvedilol	1	Oral
+128	cytarabine	1	Intravenous
+129	pergolide	0	Oral
+130	nisoldipine	0	Oral
+131	citalopram	1	Oral
+132	methyltestosterone	1	Oral
+133	testosterone	1	Oral
+134	praziquantel	0	Oral
+135	ticlopidine	1	Oral
+136	diazepam	0	Oral
+137	clomiphene	1	Oral
+138	isotretinoin	1	Oral
+139	oxymetholone	1	Oral
+140	etodolac	1	Oral
+141	glipizide	1	Oral
+142	pemoline	1	Oral
+143	clotrimazole	1	Oral
+144	celecoxib	1	Oral
+145	amoxapine	0	Oral
+146	iothalamate sodium	0	Intravenous
+147	atorvastatin	1	Oral
+148	olanzapine	1	Oral
+149	nevirapine	1	Oral
+150	primidone	0	Oral
+151	vinorelbine	0	Intravenous
+152	anastrozole	1	Oral
+153	rabeprazole	1	Oral
+154	azithromycin	1	Oral
+155	tolazamide	1	Oral
+156	quetiapine	1	Oral
+157	famciclovir	0	Oral
+158	atenolol	1	Oral
+159	benzbromarone	1	Oral
+160	bromocriptine	1	Oral
+161	busulfan	1	Oral
+162	chlorambucil	1	Oral
+163	clozapine	1	Oral
+164	dacarbazine	1	Intravenous
+165	dapsone	1	Oral
+166	digoxin	0	Oral
+167	disulfiram	1	Oral
+168	enalapril	1	Oral
+169	furosemide	0	Oral
+170	gabapentin	1	Oral
+171	glibenclamide	1	Oral
+172	isoniazid	1	Oral
+173	lansoprazole	1	Oral
+174	mebendazole	1	Oral
+175	metoprolol	1	Oral
+176	naltrexone	0	Oral
+177	niacin	1	Oral
+178	nifedipine	1	Oral
+179	nimesulide	1	Oral
+180	nizatidine	1	Oral
+181	dextrose	0	Intravenous
+182	cholestyramine	0	Oral
+183	sodium lactate	0	Intravenous
+184	verapamil	1	Oral
+185	doxorubicin	1	Intravenous
+186	clorazepate	0	Oral
+187	protirelin	0	Intravenous
+188	sincalide	0	Intravenous
+189	secretin	0	Intravenous
+190	sucralfate	0	Oral
+191	cupric chloride	0	Intravenous
+192	trientine hydrochloride	0	Oral
+193	chlorpropamide	1	Oral
+194	cyclosporine	1	Oral
+195	decitabine	0	Intravenous
+196	deferoxamine	1	Intravenous
+197	doxycycline	1	Oral
+198	exemestane	1	Oral
+199	felodipine	1	Oral
+200	fludrocortisone	0	Oral
+201	fluphenazine	0	Oral
+202	gefitinib	1	Oral
+203	haloperidol	1	Oral
+204	mesalazine	1	Oral
+205	minocycline	1	Oral
+206	ioversol	0	Intravenous
+207	oxaprozin	1	Oral
+208	paclitaxel	1	Intravenous
+209	phentolamine	0	Intravenous
+210	prazosin	0	Oral
+211	prochlorperazine	1	Oral
+212	corticorelin ovine triflutate	0	Intravenous
+213	sodium thiosulfate	0	Intravenous
+214	sirolimus	1	Oral
+215	tacrolimus	1	Oral
+216	thalidomide	1	Oral
+217	thioridazine	1	Oral
+218	thioguanine	1	Oral
+219	tolbutamide	0	Oral
+220	topiramate	1	Oral
+221	trifluoperazine	0	Oral
+222	triptorelin pamoate	1	Intramuscular
+223	alatrofloxacin mesylate	1	Oral
+224	vorinostat	0	Oral
+225	nesiritide	0	Intravenous
+226	ganirelix acetate	0	Subcutaneous
+227	gemtuzumab ozogamicin	1	Intravenous
+228	methylprednisolone	1	Oral
+229	gamma hydroxybutyric acid	0	Oral
+230	tegaserod	0	Oral
+231	penicillamine	1	Oral
+232	pramlintide	0	Subcutaneous
+233	lanthanum carbonate	0	Oral
+234	acetazolamide	1	Oral
+235	albendazole	1	Oral
+236	alprazolam	1	Oral
+237	altretamine	0	Oral
+238	amantadine	0	Oral
+239	4-aminosalicylic acid	1	Oral
+240	amoxicillin	1	Oral
+241	atropine	0	Intravenous
+242	benoxaprofen	1	Oral
+243	emtricitabine	0	Oral
+244	trospium	0	Oral
+245	bromfenac	1	Oral
+246	gadofosveset trisodium	0	Intravenous
+247	clonazepam	1	Oral
+248	exenatide	0	Subcutaneous
+249	entecavir	0	Oral
+250	danazol	1	Oral
+251	daunorubicin	0	Intravenous
+252	dimenhydrinate	0	Intravenous
+253	doxapram	0	Intravenous
+254	febuxostat	1	Oral
+255	granisetron	0	Oral
+256	griseofulvin	1	Oral
+257	hydralazine	1	Oral
+258	ibufenac	1	Oral
+259	ifosfamide	1	Intravenous
+260	deferasirox	1	Oral
+261	sunitinib	1	Oral
+262	ivermectin	1	Oral
+263	lamivudine	1	Oral
+264	methylnaltrexone bromide	0	Subcutaneous
+265	letrozole	1	Oral
+266	desvenlafaxine	1	Oral
+267	lomefloxacin	0	Oral
+268	lomustine	1	Oral
+269	lovastatin	1	Oral
+270	telbivudine	0	Oral
+271	methimazole	1	Oral
+272	methocarbamol	0	Oral
+273	metronidazole	1	Oral
+274	minoxidil	0	Oral
+275	mitomycin	1	Intravenous
+276	modafinil	1	Oral
+277	fesoterodine	0	Oral
+278	naloxone	0	Intravenous
+279	naproxen	1	Oral
+280	nateglinide	0	Oral
+281	neomycin	0	Oral
+282	levocetirizine dihydrochloride	1	Oral
+283	nystatin	0	Oral
+284	oxytetracycline	0	Oral
+285	pantoprazole	1	Oral
+286	prednisolone	1	Oral
+287	primaquine	0	Oral
+288	procarbazine	1	Oral
+289	ambrisentan	0	Oral
+290	secobarbital	0	Oral
+291	sertraline	1	Oral
+292	sotalol	0	Oral
+293	sulfathiazole	1	Oral
+294	terbinafine	1	Oral
+295	thiabendazole	1	Oral
+296	ticrynafen	1	Oral
+297	tinidazole	1	Oral
+298	maraviroc	1	Oral
+299	raltegravir	1	Oral
+300	clevidipine	0	Intravenous
+301	trovafloxacin	1	Oral
+302	regadenoson	0	Intravenous
+303	warfarin	1	Oral
+304	zaleplon	0	Oral
+305	zileuton	1	Oral
+306	ferumoxytol	0	Intravenous
+307	etravirine	1	Oral
+308	silodosin	0	Oral
+309	fospropofol	1	Intravenous
+310	bendamustine	0	Intravenous
+311	tolvaptan	1	Oral
+312	eltrombopag olamine	1	Oral
+313	tapentadol	0	Oral
+314	prasugrel hydrochloride	1	Oral
+315	saxagliptin	0	Oral
+316	romidepsin	0	Intravenous
+317	dronedarone	1	Oral
+318	pazopanib	1	Oral
+319	pancrelipase	0	Oral
+320	dexchlorpheniramine	0	Oral
+321	ecallantide	0	Subcutaneous
+322	divalproex sodium	1	Oral
+323	lumiracoxib	1	Oral
+324	tasosartan	1	Oral
+325	oxyphenisatin	1	Oral
+326	tilbroquinol	1	Oral
+327	alclofenac	1	Oral
+328	aplaviroc 	1	Oral
+329	clomacran	1	Oral
+330	dermatan	1	Intravenous
+331	isaxonine	1	Oral
+332	pipamazine	1	Oral
+333	pralnacasan 	1	Oral
+334	sulfacarbamide	1	Oral
+335	triacetyldiphenolisatin	1	Oral
+336	fiduxosin 	1	Oral
+337	pafuramidine 	1	Oral
+338	phenoxypropazine	1	Oral
+339	histamine diphosphate	0	Subcutaneous
+340	aminophylline	0	Oral
+341	meperidine	0	Oral
+342	methamphetamine	0	Oral
+343	methadone	0	Oral
+344	hyaluronidase	0	Subcutaneous
+345	doxylamine	0	Oral
+346	protamine sulfate	0	Intravenous
+347	bethanechol	0	Oral
+348	cortisone acetate	0	Oral
+349	dicyclomine	0	Oral
+350	norepinephrine	0	Intravenous
+351	dyphylline	0	Oral
+352	epinephrine	0	Subcutaneous
+353	succinylcholine	0	Intravenous
+354	thyrotropin alfa	0	Intramuscular
+355	levorphanol	0	Oral
+356	propantheline	0	Oral
+357	carbinoxamine	0	Oral
+358	diatrizoate	0	Intravenous
+359	phytonadione	0	Oral
+360	mecamylamine	0	Oral
+361	liothyronine	0	Oral
+362	methsuximide	0	Oral
+363	mepenzolate	0	Oral
+364	meclizine	0	Oral
+365	triprolidine	0	Oral
+366	benzonatate	1	Oral
+367	Sodium polystyrene sulfonate	0	Oral
+368	dichlorphenamide	0	Oral
+369	phentermine	1	Oral
+370	diethylpropion	0	Oral
+371	oxymorphone	0	Oral
+372	dexbrompheniramine	0	Oral
+373	biperiden	0	Oral
+374	isosorbide dinitrate	0	Oral
+375	mepivacaine	0	Subcutaneous
+376	bendroflumethiazide	1	Oral
+377	phendimetrazine	0	Oral
+378	oxytocin	0	Intravenous
+379	guanethidine	0	Oral
+380	ethosuximide	0	Oral
+381	benzphetamine	0	Oral
+382	glycopyrrolate	0	Oral
+383	metyrapone	0	Oral
+384	metaxalone	1	Oral
+385	oxandrolone	1	Oral
+386	oxazepam	0	Oral
+387	protriptyline	0	Oral
+388	cosyntropin	0	Intravenous
+389	flavoxate	0	Oral
+390	ketamine	1	Intravenous
+391	pancuronium	0	Intravenous
+392	pentagastrin	0	Intravenous
+393	dextroamphetamine	0	Oral
+394	terbutaline	1	Oral
+395	calcitonin salmon	0	Subcutaneous
+396	pentetic acid	0	Intravenous
+397	nitroprusside	0	Intravenous
+398	colestipol	0	Oral
+399	lactulose	0	Oral
+400	somatropin recombinant	0	Subcutaneous
+401	fluorescein	0	Intravenous
+402	metyrosine	0	Oral
+403	carboprost tromethamine	0	Intramuscular
+404	calcitriol	0	Oral
+405	morphine	0	Oral
+406	nabilone	0	Oral
+407	vecuronium	0	Intravenous
+408	atracurium	0	Intravenous
+409	hydromorphone	0	Oral
+410	sufentanil	0	Intravenous
+411	tranexamic acid	0	Oral
+412	alfentanil	0	Intravenous
+413	ethanolamine oleate	0	Intravenous
+414	rubidium chloride rb-82	0	Intravenous
+415	urofollitropin	0	Subcutaneous
+416	teriparatide	0	Subcutaneous
+417	gadopentetate dimeglumine	0	Intravenous
+418	rimantadine	0	Oral
+419	pegademase bovine	0	Intramuscular
+420	fenoldopam	0	Intravenous
+421	calcium acetate	0	Oral
+422	mivacurium	0	Intravenous
+423	gadoteridol	0	Intravenous
+424	enoxaparin	1	Subcutaneous
+425	perindopril	0	Oral
+426	rocuronium	0	Intravenous
+427	dalteparin sodium	1	Subcutaneous
+428	ferumoxsil	0	Oral
+429	ferumoxides	0	Intravenous
+430	porfimer	0	Intravenous
+431	ibutilide	0	Intravenous
+432	cisatracurium besylate	0	Intravenous
+433	oxycodone	0	Oral
+434	alendronate	1	Oral
+435	tamsulosin	1	Oral
+436	dolasetron	0	Oral
+437	remifentanil	1	Intravenous
+438	sibutramine	1	Oral
+439	tiagabine	0	Oral
+440	ropinirole	1	Oral
+441	pramipexole	0	Oral
+442	miglitol	0	Oral
+443	polyethylene glycol 3350	0	Oral
+444	delavirdine	0	Oral
+445	tiludronate	0	Oral
+446	eptifibatide	0	Intravenous
+447	eprosartan	0	Oral
+448	repaglinide	1	Oral
+449	irbesartan	1	Oral
+450	naratriptan	0	Oral
+451	zolmitriptan	0	Oral
+452	tolterodine	0	Oral
+453	nelfinavir	1	Oral
+454	rivastigmine	1	Oral
+455	ziprasidone	1	Oral
+456	risedronate	0	Oral
+457	candesartan	1	Oral
+458	clopidogrel	1	Oral
+459	rizatriptan	0	Oral
+460	bivalirudin	0	Intravenous
+461	azacitidine	0	Intravenous
+462	fluorouracil	1	Intravenous
+463	argatroban	0	Intravenous
+464	sildenafil	1	Oral
+465	acarbose	1	Oral
+466	acebutolol	1	Oral
+467	tirofiban	0	Intravenous
+468	sevelamer	0	Oral
+469	dofetilide	0	Oral
+470	acetylcysteine	0	Oral
+471	acitretin	1	Oral
+472	gadoversetamide	0	Intravenous
+473	adenosine	0	Intravenous
+474	salbutamol	0	Oral
+475	almotriptan	0	Oral
+476	frovatriptan	0	Oral
+477	oxcarbazepine	1	Oral
+478	rifapentine	0	Oral
+479	levetiracetam	1	Oral
+480	alpidem	1	Oral
+481	bexarotene	1	Oral
+482	perflutren	0	Intravenous
+483	amifostine	0	Intravenous
+484	amikacin	0	Intravenous
+485	alosetron	1	Oral
+486	aminocaproic acid	0	Oral
+487	levothyroxine	1	Oral
+488	linezolid	1	Intravenous
+489	colesevelam	0	Oral
+490	gemifloxacin	1	Oral
+491	desloratadine	1	Oral
+492	galantamine	0	Oral
+493	cefditoren	0	Oral
+494	zoledronate	1	Intravenous
+495	caspofungin	0	Intravenous
+496	atovaquone	0	Oral
+497	voriconazole	1	Oral
+498	guaifenesin	0	Oral
+499	olmesartan	0	Oral
+500	alfuzosin	1	Oral
+501	aztreonam	0	Intravenous
+502	dutasteride	0	Oral
+503	baclofen	1	Oral
+504	benazepril	1	Oral
+505	bendazac	1	Oral
+506	benzarone	1	Oral
+507	benziodarone	1	Oral
+508	ertapenem	0	Intravenous
+509	benztropine	0	Oral
+510	fondaparinux sodium	1	Subcutaneous
+511	miglustat	0	Oral
+512	gadobenate dimeglumine	0	Intravenous
+513	rifaximin	0	Oral
+514	tadalafil	0	Oral
+515	palonosetron	0	Intravenous
+516	betaxolol	0	Oral
+517	vardenafil	0	Oral
+518	bisoprolol	0	Oral
+519	bleomycin	0	Intravenous
+520	atomoxetine	1	Oral
+521	bosentan	1	Oral
+522	acamprosate	1	Oral
+523	aripiprazole	0	Oral
+524	budesonide	0	Oral
+525	bumetanide	0	Oral
+526	buspirone	0	Oral
+527	eplerenone	0	Oral
+528	butorphanol	0	Intravenous
+529	cabergoline	0	Oral
+530	ezetimibe	1	Oral
+531	pregabalin	1	Oral
+532	adefovir	1	Oral
+533	ibandronate	0	Oral
+534	carbenicillin	1	Oral
+535	carbidopa	0	Oral
+536	eszopiclone	0	Oral
+537	cefaclor	1	Oral
+538	cefadroxil	1	Oral
+539	enfuvirtide	0	Subcutaneous
+540	cefazolin	1	Intravenous
+541	cefepime	1	Intravenous
+542	cefixime	0	Oral
+543	cefoperazone	1	Intravenous
+544	cefotaxime	1	Intravenous
+545	cefoxitin	0	Intravenous
+546	cefpodoxime	0	Oral
+547	oxaliplatin	1	Intravenous
+548	cefprozil	1	Oral
+549	ceftibuten	0	Oral
+550	nitazoxanide	0	Oral
+551	ceftriaxone	1	Intravenous
+552	cefuroxime	1	Oral
+553	micafungin	1	Intravenous
+554	darifenacin	0	Oral
+555	cephalexin	1	Oral
+556	cetirizine	1	Oral
+557	solifenacin	0	Oral
+558	ranolazine	0	Oral
+559	chloramphenicol	0	Intravenous
+560	chlordiazepoxide	1	Oral
+561	atazanavir	1	Oral
+562	daptomycin	1	Intravenous
+563	chlormezanone	1	Oral
+564	bortezomib	1	Intravenous
+565	anidulafungin	0	Intravenous
+566	rasagiline	0	Oral
+567	chloroquine	1	Oral
+568	chlorothiazide	1	Oral
+569	cinacalcet	0	Oral
+570	conivaptan	0	Intravenous
+571	nebivolol	0	Oral
+572	chlorthalidone	0	Oral
+573	erlotinib	1	Oral
+574	alvimopan	0	Oral
+575	cidofovir	0	Intravenous
+576	ramelteon	0	Oral
+577	cimetidine	1	Oral
+578	cinchophen	1	Oral
+579	tipranavir	1	Oral
+580	tigecycline	0	Intravenous
+581	cladribine	0	Intravenous
+582	clindamycin	1	Oral
+583	clometacin	1	Oral
+584	urokinase	0	Intravenous
+585	clonidine	0	Oral
+586	nelarabine	1	Intravenous
+587	cloxacillin	1	Oral
+588	lenalidomide	1	Oral
+589	lubiprostone	0	Oral
+590	sorafenib	1	Oral
+591	varenicline	1	Oral
+592	darunavir	1	Oral
+593	aliskiren	1	Oral
+594	dasatinib	1	Oral
+595	cyclobenzaprine	1	Oral
+596	cyclofenil	1	Oral
+597	sitagliptin	1	Oral
+598	paliperidone	0	Oral
+599	posaconazole	0	Oral
+600	cyproheptadine	1	Oral
+601	temsirolimus	0	Intravenous
+602	tetrahydrobiopterin	0	Oral
+603	milnacipran	1	Oral
+604	desipramine	0	Oral
+605	dexlansoprazole	1	Oral
+606	everolimus	0	Oral
+607	codeine	0	Oral
+608	colistimethate	0	Intravenous
+609	benzylpenicilloyl polylysine	0	Subcutaneous
+610	cephradine	0	Oral
+611	ceftizoxime	0	Intravenous
+612	didanosine	1	Oral
+613	mycophenolate mofetil	1	Oral
+614	cefdinir	1	Oral
+615	polymyxin b sulfate	0	Intravenous
+616	diltiazem	1	Oral
+617	sterile water	0	Intravenous
+618	disopyramide	1	Oral
+619	asparaginase	1	Intravenous
+620	botulinum toxin type a	0	Intramuscular
+621	interferon alfa-2b	1	Intravenous
+622	dobutamine	0	Intravenous
+623	docetaxel	1	Intravenous
+624	"interferon alfa-2a, recombinant"	1	Subcutaneous
+625	doxazosin	0	Oral
+626	doxepin	1	Oral
+627	alteplase	0	Intravenous
+628	epoetin alfa	0	Intravenous
+629	droperidol	0	Intravenous
+630	droxicam	1	Oral
+631	sargramostim	0	Intravenous
+632	pegaspargase	1	Intravenous
+633	efavirenz	1	Oral
+634	muromonab-cd3	0	Intravenous
+635	interferon beta-1b	1	Subcutaneous
+636	abciximab	0	Intravenous
+637	interferon beta-1a	1	Intramuscular
+638	esmolol	0	Intravenous
+639	estazolam	0	Oral
+640	interferon alfacon-1	1	Subcutaneous
+641	oprelvekin	0	Subcutaneous
+642	estramustine	1	Oral
+643	ethambutol	1	Oral
+644	basiliximab	0	Intravenous
+645	ethionamide	1	Oral
+646	palivizumab	0	Intramuscular
+647	infliximab	1	Intravenous
+648	reteplase	0	Intravenous
+649	trastuzumab	1	Intravenous
+650	etanercept	1	Subcutaneous
+651	etidronic acid	0	Oral
+652	botulinum toxin type b	0	Intramuscular
+653	etomidate	0	Intravenous
+654	exifone	1	Oral
+655	tenecteplase	0	Intravenous
+656	rasburicase	0	Intravenous
+657	alemtuzumab	0	Intravenous
+658	peginterferon alfa-2b	1	Subcutaneous
+659	fexofenadine	0	Oral
+660	fialuridine	1	Oral
+661	fipexide	1	Oral
+662	anakinra	1	Subcutaneous
+663	darbepoetin alfa	1	Intravenous
+664	flecainide	1	Oral
+665	omalizumab	0	Subcutaneous
+666	ibritumomab tiuxetan	0	Intravenous
+667	pegfilgrastim	0	Subcutaneous
+668	flucytosine	0	Oral
+669	fludarabine	0	Oral
+670	flumazenil	0	Intravenous
+671	adalimumab	1	Subcutaneous
+672	cetuximab	0	Intravenous
+673	bevacizumab	0	Intravenous
+674	palifermin	0	Intravenous
+675	natalizumab	1	Intravenous
+676	flurazepam	1	Oral
+677	fluvoxamine	0	Oral
+678	foscarnet	0	Intravenous
+679	fosfomycin	1	Oral
+680	fosinopril	1	Oral
+681	fosphenytoin	1	Intramuscular
+682	galsulfase	0	Intravenous
+683	abatacept	1	Intravenous
+684	alglucosidase alfa	0	Intravenous
+685	gemcitabine	1	Intravenous
+686	panitumumab	0	Intravenous
+687	idursulfase	0	Intravenous
+688	certolizumab pegol	0	Subcutaneous
+689	eculizumab	0	Intravenous
+690	rilonacept	0	Subcutaneous
+691	ustekinumab	0	Subcutaneous
+692	romiplostim	0	Subcutaneous
+693	ofatumumab	0	Intravenous
+694	hydrochlorothiazide	1	Oral
+695	idarubicin	0	Intravenous
+696	indapamide	0	Oral
+697	indinavir	0	Oral
+698	iodipamide meglumine	0	Intravenous
+699	irinotecan	1	Intravenous
+700	l-methionine	0	Oral
+701	isradipine	1	Oral
+702	kanamycin	0	Intravenous
+703	riboflavin	0	Oral
+704	lamotrigine	1	Oral
+705	l-carnitine	0	Oral
+706	levofloxacin	1	Oral
+707	levonorgestrel	0	Oral
+708	lisinopril	1	Oral
+709	loracarbef	1	Oral
+710	loratadine	0	Oral
+711	losartan	1	Oral
+712	loxapine	0	Oral
+713	mebanazine	1	Oral
+714	mechlorethamine	0	Intravenous
+715	mefloquine	1	Oral
+716	vitamin e	0	Oral
+717	melphalan	1	Oral
+718	meprobamate	0	Oral
+719	meropenem	1	Intravenous
+720	methazolamide	1	Oral
+721	methoxsalen	1	Oral
+722	methylphenidate	1	Oral
+723	methylscopolamine bromide	0	Oral
+724	metoclopramide	1	Oral
+725	mexiletine	1	Oral
+726	midazolam	0	Oral
+727	midodrine	0	Oral
+728	mirtazapine	1	Oral
+729	mitotane	0	Oral
+730	mitoxantrone	1	Intravenous
+731	moexipril	0	Oral
+732	moxisylyte	1	Oral
+733	folic acid	0	Oral
+734	nabumetone	0	Oral
+735	nadolol	0	Oral
+736	nafcillin	1	Intravenous
+737	nalbuphine	0	Intravenous
+738	nialamide	1	Oral
+739	nicardipine	0	Oral
+740	nimodipine	0	Oral
+741	niperotidine	1	Oral
+742	nitroglycerin	0	Oral
+743	nomifensine	1	Oral
+744	norfloxacin	1	Oral
+745	nortriptyline	1	Oral
+746	octreotide	1	Intravenous
+747	ondansetron	1	Oral
+748	ofloxacin	1	Oral
+749	diphenoxylate	0	Oral
+750	oxacillin	1	Intravenous
+751	ambenonium	0	Oral
+752	papaverine	1	Intravenous
+753	penbutolol	0	Oral
+754	penicillin g	1	Intravenous
+755	penicillin v	0	Oral
+756	pentazocine	0	Intravenous
+757	pentostatin	1	Intravenous
+758	perphenazine	1	Oral
+759	phenelzine	1	Oral
+760	ephedrine	0	Intravenous
+761	pimozide	0	Oral
+762	pindolol	0	Oral
+763	piperacillin	0	Intravenous
+764	piroxicam	1	Oral
+765	pirprofen	1	Oral
+766	salsalate	1	Oral
+767	polythiazide	0	Oral
+768	probenecid	0	Oral
+769	procainamide	1	Intravenous
+770	propafenone	1	Oral
+771	propranolol	0	Oral
+772	propofol	1	Intravenous
+773	pyrantel	0	Oral
+774	pyrimethamine	1	Oral
+775	quazepam	0	Oral
+776	quinapril	1	Oral
+777	quinidine	1	Oral
+778	ramipril	1	Oral
+779	reserpine	0	Oral
+780	ribavirin	0	Oral
+781	riluzole	1	Oral
+782	risperidone	1	Oral
+783	ritonavir	1	Oral
+784	saquinavir	1	Oral
+785	selegiline	0	Oral
+786	succimer	1	Oral
+787	sumatriptan	0	Oral
+788	temazepam	0	Oral
+789	teniposide	1	Intravenous
+790	terazosin	0	Oral
+791	thiotepa	1	Intravenous
+792	timolol	0	Oral
+793	sulcotidil	1	Oral
+794	tolmetin	1	Oral
+795	tolrestat	1	Oral
+796	topotecan	0	Oral
+797	tramadol	0	Oral
+798	trandolapril	1	Oral
+799	tranylcypromine	1	Oral
+800	trazodone	1	Oral
+801	triamterene	1	Oral
+802	triazolam	0	Oral
+803	trihexyphenidyl	0	Oral
+804	trimethobenzamide	0	Oral
+805	trimethoprim	1	Oral
+806	fenclozic acid	1	Oral
+807	ebrotidine	1	Oral
+808	aceclofenac	1	Oral
+809	nitrefazole	1	Oral
+810	valaciclovir	1	Oral
+811	valsartan	1	Oral
+812	tetrabamate	1	Oral
+813	vincristine	1	Intravenous
+814	xenazoic acid	1	Oral
+815	zafirlukast	1	Oral
+816	falnidamol 	1	Oral
+817	zimelidine	1	Oral
+818	caffeine	0	Intravenous
+819	capreomycin	0	Intravenous
+820	lidocaine	0	Oral
+821	memantine	1	Oral
+822	pamidronate	0	Intravenous
+823	quinine	1	Oral
+824	rosuvastatin	1	Oral
+825	sulfamethizole	1	Oral
+826	telithromycin	1	Oral
+827	entacapone	1	Oral
+828	valdecoxib	1	Oral
+829	dexpanthenol	0	Intravenous
+830	scopolamine	0	Intravenous
+831	pyridoxine	0	Intravenous
+832	thiamine	0	Intravenous
+833	cyanocobalamin	0	Subcutaneous
+834	cromoglicate	1	Oral
+835	montelukast	1	Oral
+836	moxifloxacin	1	Oral
+837	vitamin c	0	Intravenous
+838	sorbitol	0	Oral
+839	capecitabine	0	Oral
+840	leuprolide	1	Subcutaneous
+841	eletriptan	0	Oral
+842	hydroxychloroquine	1	Oral
+843	ximelagatran	1	Oral
+844	duloxetine	1	Oral
+845	carisoprodol	0	Oral
+846	dicloxacillin	1	Oral
+847	metolazone	0	Oral
+848	pamabrom	0	Oral
+849	dextromethorphan	0	Oral
+850	bacitracin	0	Intramuscular
+851	paromomycin	0	Oral
+852	telmisartan	1	Oral
+853	ammonium chloride	0	Intravenous
+854	amiloride	1	Oral
+855	methysergide	0	Oral
+856	methylergonovine	0	Oral
+857	brompheniramine	0	Oral
+858	l-arginine	0	Intravenous
+859	pyridostigmine	0	Oral
+860	phenoxybenzamine	0	Oral
+861	oxybutynin	0	Oral
+862	orphenadrine	0	Oral
+863	loperamide	0	Oral
+864	isoxsuprine	0	Oral
+865	glafenine	1	Oral
+866	acetylcholine chloride	0	Oral
+867	amphetamine	1	Oral
+868	mepazine	1	Oral
+869	nandrolone decanoate	1	Intramuscular
+870	auranofin	1	Oral
+871	simethicone	0	Oral
+872	betaine	0	Oral
+873	bisacodyl	0	Oral
+874	leucovorin	0	Oral
+875	lapatinib	1	Oral
+876	oseltamivir	0	Oral
+877	alaproclate	1	Oral
+878	orlistat	1	Oral
+879	apomorphine	0	Subcutaneous
+880	dihydroergotamine	0	Intravenous
+881	procyclidine	0	Oral
+882	clemastine	0	Oral
+883	tenofovir	1	Oral
+884	norethindrone acetate	0	Oral
+885	exametazime	0	Intravenous
+886	erythropoietin	0	Intravenous
+887	Argipressin	0	Intravenous
+888	sodium bicarbonate	0	Intravenous
+889	plerixafor	0	Subcutaneous
+890	tyramine	0	Oral
+891	Hetastarch	0	Intravenous
+892	imiglucerase	0	Intravenous
+893	agalsidase beta	0	Intravenous
+894	gadolinium ethoxybenzyl DTPA	0	Intravenous
+895	canakinumab	1	Subcutaneous
+896	Levoleucovorin	0	Intravenous
+897	levomefolate calcium	0	Oral
+898	sitaxsentan	1	Oral
+899	dexmethylphenidate	1	Oral
+900	hyaluronidase recombinant human	0	Subcutaneous
+901	Androgenic steroids*	1	
+902	Floxuridine	1	Intra-arterial
+903	Flucloxacillin	1	oral
+904	Halothane	1	Respiratory (inhalation)
+905	Peginterferon	1	
+906	Sulfonamides*	1	oral
+907	Acetohexamide	1	oral
+908	Dabigatran	1	oral
+909	Gliclazide	1	Oral
+910	Imipenem	1	Intravenous
+911	Lopinavir	1	Oral
+912	Molindone	1	Oral
+913	Plicamycin	1	
+914	Rilpivirine	1	Oral
+915	Tibolone	1	
+916	Tobramycin	1	
+917	Vismodegib	1	Oral
+918	Hydrocodone	0	Oral
+919	Zalcitabine	0	Oral
+920	Acrivastine	0	Oral
+921	Amobarbital	0	"Intramuscular; Intravenous, oral"
+922	Artemether	0	Oral
+923	Bitolterol	0	
+924	Butalbital	0	Oral
+925	Butobarbital	0	
+926	Carmustine	0	Intravenous
+927	Chloral hydrate	0	Oral
+928	Chlortetracycline	0	Tropical
+929	Cilastatin	0	Intravenous
+930	Cisapride	0	Oral
+931	Cobicistat	0	Oral
+932	Docusate	0	oral
+933	Ergotamine	0	oral
+934	Ethacrynate	0	oral
+935	Fentanyl	0	Sublingual
+936	Formoterol	0	Respiratory (inhalation)
+937	Gentamicin	0	Intramuscular; Intravenous
+938	Homatropine	0	Ophthalmic
+939	Hyoscyamine	0	oral
+940	Ipratropium	0	Oral; Respiratory (inhalation)
+941	Levamisole	0	Oral
+942	Levodopa	0	Oral
+943	Liraglutide	0	Subcutaneous
+944	Nalmefene	0	Oral
+945	Pegaptanib	0	Intravitreal
+946	Proguanil	0	Oral
+947	Salmeterol	0	Oral; Respiratory (inhalation)
+948	Tazobactam	0	Intravenous; Parenteral
+949	Thiopental	0	Intravenous
+950	Ticarcillin	0	Intramuscular; Intravenous
+951	Tiotropium	0	Oral; Respiratory (inhalation)
+952	Zanamivir	0	Oral; Respiratory (inhalation)
+953	ACEMETACIN	1	
+954	ACETARSOL	1	Vaginal
+955	Alatrofloxacin	1	
+956	Alimemazine	1	Oral
+957	ANDROSTANOLONE	1	
+958	Antithymocyte Immunoglobulin	1	
+959	Artemisinin	1	
+960	Artesunate	1	
+961	bendazolic acid	1	
+962	Bupivacaine	1	Epidural; Infiltration; Intracaudal; Perineural
+963	CALCIUM CARBIMIDE	1	Oral
+964	CARBIMAZOLE	1	
+965	Cerivastatin	1	Oral
+966	CILAZAPRIL	1	Oral
+967	CINITAPRIDE	1	
+968	Clomacron	1	
+969	CLOMETHIAZOLE	1	
+970	CLOTIAZEPAM	1	
+971	COCAINE	1	"Nasal, Torpical"
+972	CYPROTERONE	1	"Oral, Intramuscular"
+973	Dehydroepiandrosterone	1	
+974	Desflurane	1	Respiratory (inhalation)
+975	DEXKETOPROFEN	1	
+976	Diacetoxydiphenolisatin	1	
+977	DICOUMAROL	1	
+978	EBASTINE	1	
+979	ENFLURANE	1	Respiratory (inhalation)
+980	ESTRIOL	1	
+981	Ethinylestradiol	1	"Oral, Transdermal"
+982	ETRETINATE	1	
+983	FLUPENTIXOL	1	"Oral, Intramuscular"
+984	Fusidic Acid	1	"Oral, Topical, Intravenous, optahlmic"
+985	Gemtuzumab	1	
+986	GLUCOSAMINE	1	Topical
+987	Growth Hormone	1	Intravenous
+988	Interferon Unspecified	1	
+989	Interferon-Beta-1a	1	
+990	interferon-Beta-1b	1	
+991	Ioxaglate And Meglumine	1	Intravascular
+992	Isaxonine phosphate	1	"Oral,Intramuscular; Intravenous"
+993	JOSAMYCIN	1	
+994	LEVOMEPROMAZINE	1	"Oral,Intramuscular; Intravenous"
+995	Melperone	1	
+996	METAMIZOLE	1	
+997	Methoxyflurane	1	
+998	Methylene Dioxymethamphetamine	1	
+999	NIFLUMIC ACID	1	
+1000	Oxyiminoalkanoic acid derivative	1	
+1001	Peginterferon-Alfa-2a	1	
+1002	PENICILLIN	1	
+1003	Phenisatin	1	
+1004	Pivmecillinam	1	Oral
+1005	RITODRINE	1	"Oral, Intravenous"
+1006	ROFECOXIB	1	Oral
+1007	ROXITHROMYCIN	1	
+1008	STANOZOLOL	1	
+1009	STREPTOKINASE	1	Intracoronary; Intravenous
+1010	Suloctidil	1	
+1011	TACRINE	1	
+1012	TENOXICAM	1	Oral
+1013	TIRATRICOL	1	
+1014	TRIPTORELIN	1	"Subcutaneous, Intramuscular"
+1015	phenacetin	1	
+1016	bithionol	1	
+1017	hexachlorophene	1	Topical
+1018	methapyrilene	1	
+1019	tripelennamine	1	"Topical, Oral, vaginal"
+1020	oxyquinoline	1	"oral, Topical,Vaginal, Dental"
+1021	meticillin	1	
+1022	amsacrine	1	Intravenous
+1023	furazolidone	1	
+1024	hycanthone	1	
+1025	idoxuridine	1	"Opthalmic, Topical"
+1026	novobiocin	1	
+1027	tianeptine	1	
+1028	methacycline	1	
+1029	bepridil	1	
+1030	betahistine	1	Oral
+1031	ciprofibrate	1	
+1032	diethylcarbamazine	1	Oral
+1033	fenoterol	1	Oral; Respiratory (inhalation)
+1034	phenylbutazone	1	Oral
+1035	ethynodiol diacetate	1	Oral
+1036	atractyloside	1	
+1037	temafloxacin	1	
+1038	cefamandole	1	Intramuscular; Intravenous
+1039	amodiaquine	1	
+1040	glutethimide	1	
+1041	sulfanilamide	1	Vaginal
+1042	2-acetylaminofluorene	1	
+1043	demecarium bromide	1	
+1044	cefalotin	1	Intramuscular; Intravenous
+1045	uracil mustard	1	
+1046	methylphenobarbital	1	
+1047	acenocoumarol	1	Oral
+1048	1-naphthylisothiocyanate	1	
+1049	aflatoxin b1	1	
+1050	indacrinone	1	
+1051	cefotiam	1	
+1052	troleandomycin	1	
+1053	perhexiline maleate	1	
+1054	ciglitazone	1	
+1055	fluspirilene	1	Intramuscular
+1056	norgestrel	1	Oral
+1057	carbon tetrachloride	1	
+1058	aurothioglucose	1	Intramuscular
+1059	phenothiazine	1	
+1060	allyl alcohol	1	
+1061	bromobenzene	1	
+1062	azatadine	1	Oral
+1063	allyl formate	1	
+1064	tauroursodeoxycholic acid	1	
+1065	octylmethoxycinnamate	1	
+1066	ketotifen	0	"Opthalmic, Topical"
+1067	permethrin	0	Topical
+1068	oxyphenonium	0	
+1069	pyridoxal phosphate	0	Oral
+1070	aminoglutethimide	0	Oral
+1071	tetracaine	0	Topical
+1072	miconazole	0	Topical
+1073	lindane	0	Topical
+1074	astemizole	0	Oral
+1075	ciclopirox	0	Topical
+1076	pinacidil	0	
+1077	terfenadine	0	Oral
+1078	methoxamine	0	Intramuscular; Intravenous
+1079	beclomethasone	0	"Topical,Respiratory (inhalation)"
+1080	vidarabine	0	
+1081	bezafibrate	0	oral
+1082	bambuterol	0	
+1083	gallamine triethiodide	0	Intravenous
+1084	melatonin	0	Oral
+1085	nocodazole	0	
+1086	zomepirac	0	
+1087	alloxan	0	
+1088	pargyline	0	
+1089	probucol	0	Oral
+1090	lactose	0	Oral
+1091	anileridine	0	"Oral, Intramuscular; Intravenous; Subcutaneous"
+1092	citicoline	0	
+1093	mometasone	0	"Topical,Respiratory (inhalation)"
+1094	capsaicin	0	Percutaneous; Topical; Transdermal
+1095	ergonovine	0	"Oral, Intramuscular; Intravenous"
+1096	econazole	0	Topical
+1097	sulconazole nitrate	0	Topical
+1098	sulfabenzamide	0	
+1099	cephapirin	0	
+1100	azlocillin	0	
+1101	butoconazole	0	Vaginal
+1102	mibefradil	0	
+1103	ragaglitazar	0	
+1104	bismuth subsalicylate	0	Oral
+1105	isoxicam	0	
+1106	inositol	0	"Oral, Vaginal"
+1107	latamoxef	0	
+1108	Abiraterone	1	
+1109	Acetorphan	1	
+1110	Alfacalcidol	1	
+1111	Ambroxol	1	
+1112	Aminolevulinic acid	1	
+1113	Amisulpride	1	
+1114	Ampiroxicam	1	
+1115	Anethole	1	
+1116	Arbekacin	1	
+1117	Axitinib	1	
+1118	Azelnidipine	1	
+1119	Bacampicillin	1	
+1120	Benidipine	1	
+1121	Beraprost	1	
+1122	Boceprevir	1	
+1123	Bromazepam	1	
+1124	Bromhexine	1	
+1125	Bromisoval	1	
+1126	Brotizolam	1	
+1127	Bucillamine	1	
+1128	Buflomedil	1	
+1129	Buprenorphine	1	
+1130	Cabazitaxel	1	
+1131	Cefcapene	1	
+1132	Cefmetazole	1	
+1133	Cefozopran	1	
+1134	Cefpirome	1	
+1135	Celiprolol	1	
+1136	Chlormadinone	1	
+1137	Cibenzoline	1	
+1138	Cilnidipine	1	
+1139	Clobazam	1	
+1140	Clobetasol	1	
+1141	Clodronic acid	1	
+1142	Clofazimine	1	
+1143	Cloperastine	1	
+1144	Crizotinib	1	
+1145	Curcumin	1	
+1146	Cyamemazine	1	
+1147	Cyclothiazide	1	
+1148	Desogestrel	1	
+1149	Diacerein	1	
+1150	Dihydrocodeine	1	
+1151	Dirithromycin	1	
+1152	Domperidone	1	
+1153	Doxifluridine	1	
+1154	Droxidopa	1	
+1155	Dydrogesterone	1	
+1156	Edaravone	1	
+1157	Eltrombopag	1	
+1158	Eperisone	1	
+1159	Epinastine	1	
+1160	Eribulin Mesylate	1	
+1161	Ethanol	1	
+1162	Ethyl loflazepate	1	
+1163	Ethylene glycol	1	
+1164	Etizolam	1	
+1165	Etoricoxib	1	
+1166	Flomoxef	1	
+1167	Fluindione	1	
+1168	Flunitrazepam	1	
+1169	Flupirtine	1	
+1170	Fominoben	1	
+1171	Fosfluconazole	1	
+1172	Fudosteine	1	
+1173	Gabapentin Enacarbil	1	
+1174	Gabexate	1	
+1175	Garenoxacin	1	
+1176	Glutathione	1	
+1177	Glycerol	1	
+1178	Glycyrrhizin	1	
+1179	Halofantrine	1	
+1180	Heptaminol	1	
+1181	Hypericin	1	
+1182	Ibudilast	1	
+1183	Iloprost	1	
+1184	Irsogladine	1	
+1185	Isepamicin	1	
+1186	Isosorbide	1	
+1187	Itopride	1	
+1188	Lafutidine	1	
+1189	Lanreotide	1	
+1190	Lercanidipine	1	
+1191	Levocetirizine	1	
+1192	Lodenosine	1	
+1193	Lormetazepam	1	
+1194	Lornoxicam	1	
+1195	Loxoprofen	1	
+1196	Manidipine	1	
+1197	Mazindol	1	
+1198	Menatetrenone	1	
+1199	Mequitazine	1	
+1200	Metopimazine	1	
+1201	Mitiglinide	1	
+1202	Mizoribine	1	
+1203	Molsidomine	1	
+1204	Mosapride	1	
+1205	Moxonidine	1	
+1206	Nafamostat	1	
+1207	Naftidrofuryl	1	
+1208	Nandrolone	1	
+1209	Nefopam	1	
+1210	Netilmicin	1	
+1211	Nicergoline	1	
+1212	Nicorandil	1	
+1213	Nitrazepam	1	
+1214	Nitrendipine	1	
+1215	Nordazepam	1	
+1216	Norethisterone	1	
+1217	Olopatadine	1	
+1218	Oxatomide	1	
+1219	Oxyphenbutazone	1	
+1220	Ozagrel	1	
+1221	Pazufloxacin	1	
+1222	Peramivir	1	
+1223	Phenformin	1	
+1224	Phenprocoumon	1	
+1225	Phenylephrine	1	
+1226	Phloroglucinol	1	
+1227	Picolamine	1	
+1228	Pilsicainide	1	
+1229	Pimecrolimus	1	
+1230	Pinaverium	1	
+1231	Piperacetazine	1	
+1232	Pipobroman	1	
+1233	Piracetam	1	
+1234	Pirarubicin	1	
+1235	Pranlukast	1	
+1236	Pranoprofen	1	
+1237	Prazepam	1	
+1238	Propacetamol	1	
+1239	Propiverine	1	
+1240	Raltitrexed	1	
+1241	Rebamipide	1	
+1242	Rilmenidine	1	
+1243	Rivaroxaban	1	
+1244	Roxatidine	1	
+1245	Salicylic acid	1	
+1246	Sarpogrelate	1	
+1247	Sennoside	1	
+1248	Sofalcone	1	
+1249	Sparfloxacin	1	
+1250	Sulfamethoxazole	1	
+1251	Sulpiride	1	
+1252	Suplatast	1	
+1253	Tandospirone	1	
+1254	Telaprevir	1	
+1255	Temocapril	1	
+1256	Teprenone	1	
+1257	Tetrazepam	1	
+1258	Theobromine	1	
+1259	Thiocolchicoside	1	
+1260	Tiapride	1	
+1261	Tiaprofenic acid	1	
+1262	Tiquizium	1	
+1263	Tocainide	1	
+1264	Trabectedin	1	
+1265	Tranilast	1	
+1266	Trapidil	1	
+1267	Trichlormethiazide	1	
+1268	Trimebutine	1	
+1269	Trimetazidine	1	
+1270	Tropatepine	1	
+1271	Troxipide	1	
+1272	Urapidil	1	
+1273	Valpromide	1	
+1274	Vemurafenib	1	
+1275	Vindesine	1	
+1276	Voglibose	1	
+1277	Xylometazoline	1	
+1278	Zaltoprofen	1	
+1279	Zopiclone	1	

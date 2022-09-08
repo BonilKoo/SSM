@@ -1,0 +1,81 @@
+CID	Canonical SMILES	CompoundName	DILI_label
+187	CC(=O)OCC[N+](C)(C)C	acetylcholine chloride	0
+896	CC(=O)NCCc1c[nH]c2c1cc(cc2)OC	melatonin	0
+978	c1cc(ccc1C(=O)O)N	4-aminobenzoic acid	0
+1051	Cc1c(c(c(cn1)COP(=O)(O)O)C=O)O	pyridoxal phosphate	0
+1674	Cc1ccc2cc3c4ccccc4ccc3c5c2c1CC5	3-methylcholanthrene	1
+2019	Cc1ccc(c2c1oc-3c(c(=O)c(c(c3n2)C(=O)NC4C(OC(=O)C(N(C(=O)CN(C(=O)C5CCCN5C(=O)C(NC4=O)C(C)C)C)C)C(C)C)C)N)C)C(=O)NC6C(OC(=O)C(N(C(=O)CN(C(=O)C7CCCN7C(=O)C(NC6=O)C(C)C)C)C)C(C)C)C	dactinomycin	1
+2750	CC1(CCCCC1)COc2ccc(cc2)CC3C(=O)NC(=O)S3	ciglitazone	1
+3394	CC(c1ccc(c(c1)F)c2ccccc2)C(=O)O	flurbiprofen	1
+3415	C(=O)(O)P(=O)(O)O	foscarnet	0
+3698	c1cnccc1c2cc(c(=O)[nH]c2)N	amrinone	1
+3899	Cc1c(cno1)C(=O)Nc2ccc(cc2)C(F)(F)F	leflunomide	1
+3948	CCn1cc(c(=O)c2c1c(c(c(c2)F)N3CCNC(C3)C)F)C(=O)O	lomefloxacin	1
+4037	Cc1ccc(c(c1Cl)Nc2ccccc2C(=O)O)Cl	meclofenamic acid	1
+4054	CC12CC3CC(C1)(CC(C3)(C2)N)C	memantine	0
+4078	CN1CCCCC1CCN2c3ccccc3Sc4c2cc(cc4)S(=O)C	mesoridazine	1
+4122	COC(=O)Nc1[nH]c2cc(ccc2n1)C(=O)c3cccs3	nocodazole	0
+4184	CN1CCN2c3ccccc3Cc4ccccc4C2C1	mianserin	1
+4421	CCn1cc(c(=O)c2c1nc(cc2)C)C(=O)O	nalidixic acid	1
+4891	c1ccc2c(c1)CCN3C2CN(CC3=O)C(=O)C4CCCCC4	praziquantel	0
+5318	c1cc(ccc1CSC(Cn2ccnc2)c3ccc(cc3Cl)Cl)Cl	sulconazole nitrate	0
+5328	Cc1nnc(s1)NS(=O)(=O)c2ccc(cc2)N	sulfamethizole	1
+5576	CC1(C(=O)N(C(=O)O1)C)C	trimethadione	1
+5591	Cc1c(c2c(c(c1O)C)CCC(O2)(C)COc3ccc(cc3)CC4C(=O)NC(=O)S4)C	troglitazone	1
+5781	C1(=O)C(=O)NC(=O)NC1=O	alloxan	0
+5870	CC12CCC3c4ccc(cc4CCC3C1CCC2=O)O	estrone	1
+5897	CC(=O)Nc1ccc-2c(c1)Cc3c2cccc3	2-acetylaminofluorene	1
+5910	CCC1C(COC1=O)Cc2cncn2C	pilocarpine	0
+5943	C(Cl)(Cl)(Cl)Cl	carbon tetrachloride	1
+5965	CN(CCCCCCCCCCN(C)C(=O)Oc1cccc(c1)[N+](C)(C)C)C(=O)Oc2cccc(c2)[N+](C)(C)C.[Br-].[Br-]	demecarium bromide	1
+6503	C(C(CO)(CO)N)O	tromethamine	0
+7858	C=CCO	allyl alcohol	1
+7961	c1ccc(cc1)Br	bromobenzene	1
+9052	CC(=O)CC(c1ccc(cc1)[N+](=O)[O-])c2c(=O)c3ccccc3oc2O	acenocoumarol	1
+9346	Cc1c(ccc2c1oc(c(c2=O)NC(=O)c3ccc(c(c3)CC=C(C)C)O)O)OC4C(C(C(C(O4)(C)C)OC)OC(=O)N)O	novobiocin	1
+9444	c1nc(nc(=O)n1C2C(C(C(O2)CO)O)O)N	azacitidine	1
+10133	CC(CCC(=O)O)C1CCC2C1(CCC3C2C(CC4C3(CCC(C4)O)C)O)C	chenodiol	1
+11080	c1ccc2c(c1)cccc2N=C=S	1-naphthylisothiocyanate	1
+14403	COc1cc2c(c3c1c4c(c(=O)o3)C(=O)CC4)C5C=COC5O2	aflatoxin b1	1
+15541	CC1CC(=O)C2(C(O1)OC3C(C(C(C(C3O2)NC)O)NC)O)O	spectinomycin	1
+20469	CC1CC2C3CCC4=CC(=O)C=CC4(C3(C(CC2(C1(C(=O)CO)O)C)O)Cl)C	beclomethasone	0
+25517	[NH4+].[Cl-]	ammonium chloride	0
+27686	c1cc2c(c(c1)OCC(COc3ccc4c(c3)c(=O)cc(o4)C(=O)O)O)c(=O)cc(o2)C(=O)O	cromoglicic acid	0
+29327	CN(C(=O)NC1C(C(C(OC1O)CO)O)O)N=O	streptozocin	0
+32326	c1nc(c2c(n1)n(cn2)C3C(C(C(O3)CO)O)O)N.O	vidarabine	0
+34633	CCOC(=O)Nc1ccc2c(c1)N(c3ccccc3S2)C(=O)CCN4CCOCC4	moricizine	1
+42266	CC1(Cc2cc(c(c(c2C1=O)Cl)Cl)OCC(=O)O)c3ccccc3	indacrinone	1
+47472	c1cc(c(c(c1)Cl)SC(CCc2ccc(cc2)Cl)Cn3ccnc3)Cl	butoconazole	0
+50313	c1c(c(=O)[nH]c(=O)n1C2C(C(C(O2)CO)O)F)I	fialuridine	1
+50614	Cn1c(nnn1)SCC2=C(N3C(C(C3=O)(NC(=O)C4SC(=C(C(=O)N)C(=O)O)S4)OC)SC2)C(=O)O	cefotetan	0
+54766	CC(C)(C)NCC(c1cc(cc(c1)OC(=O)N(C)C)OC(=O)N(C)C)O	bambuterol	0
+54841	Cc1ccccc1OC(CCNC)c2ccccc2	atomoxetine	1
+60663	CC(C)C1c2ccc(cc2CCC1(CCN(C)CCCc3[nH]c4ccccc4n3)OC(=O)COC)F	mibefradil	0
+60919	Cc1c2c(nc(n1)C)N(C(=O)CC2)Cc3ccc(cc3)c4ccccc4c5n[nH]nn5	tasosartan	1
+61278	C=CCOC=O	allyl formate	1
+62959	c1cc(c(cc1F)F)n2cc(c(=O)c3c2nc(c(c3)F)N4CC5C(C4)C5N)C(=O)O	trovafloxacin	1
+67425	CCN(CC)CCOc1cccc(c1OCCN(CC)CC)OCCN(CC)CC	gallamine triethiodide	0
+68870	CN1c2ccccc2C(c3ccc(cc3S1(=O)=O)Cl)NCCCCCCC(=O)O	tianeptine	1
+72474	Cc1c2c(cc(c1F)N3CCNC(C3)C)n(cc(c2=O)C(=O)O)C4CC4	grepafloxacin	1
+104865	CC(C)(C)c1ccc(cc1)S(=O)(=O)Nc2c(c(nc(n2)c3ncccn3)OCCO)Oc4ccccc4OC	bosentan	1
+123620	CC1CC2C3CCC4=CC(=O)C=CC4(C3(C(CC2(C1(C(=O)CCl)O)C)O)Cl)C	mometasone	0
+294641	C1C(ON=C1Cl)C(C(=O)O)N	acivicin	0
+441203	N.N.Cl[Pt+2]Cl	cisplatin	1
+446156	CC(C)c1c(c(c(c(n1)C(C)C)C=CC(CC(CC(=O)O)O)O)c2ccc(cc2)F)COC	cerivastatin	1
+447458	CCOC(Cc1ccc(cc1)OCCN2c3ccccc3Oc4c2cccc4)C(=O)O	ragaglitazar	0
+498142	C1CC(C1)(C(=O)O)C(=O)O.[NH2-].[NH2-].[Pt]	carboplatin	1
+656511	CC1(C(N2C(S1)C(C2=O)NC(=O)C(c3ccccc3)NC(=O)N4CCN(C4=O)S(=O)(=O)C)C(=O)O)C	mezlocillin	1
+3000502	CC1C(=O)NC(C(=O)NC(=CNC(=O)N)C(=O)NC(C(=O)NCC(C(=O)N1)N)C2CCN=C(N2)N)CNC(=O)CC(CCCN)N.C1CN=C(NC1C2C(=O)NCC(C(=O)NC(C(=O)NC(C(=O)NC(=CNC(=O)N)C(=O)N2)CNC(=O)CC(CCCN)N)CO)N)N	capreomycin	0
+4659569	Cc1ccc(cc1)C(=O)c2cc(c(c(c2)O)O)[N+](=O)[O-]	tolcapone	1
+5280452	CN1C(=C(Nc2ccccn2)O)C(=O)c3ccccc3S1(=O)=O	piroxicam	1
+5281011	CC1c2cccc(c2C(=C3C1C(C4C(C(=O)C(=C(N)O)C(=O)C4(C3=O)O)N(C)C)O)O)O	doxycycline	1
+5281021	CN(C)c1ccc(c2c1CC3CC4C(C(=O)C(=C(N)O)C(=O)C4(C(=O)C3=C2O)O)N(C)C)O	minocycline	1
+5284439	C1CCC(CC1)C(CC2CCCCN2)C3CCCCC3.C(=CC(=O)O)C(=O)O	perhexiline maleate	1
+5284594	C=C1CCC2(C3Cc4ccc(c5c4C2(C1O5)CCN3CC6CC6)O)O	nalmefene hydrochloride	0
+5353990	CC1(c2cccc(c2C(=C3C1CC4C(C(=O)C(=C(N)O)C(=O)C4(C3=O)O)N(C)C)O)O)O	tetracycline	1
+5362041	CC1C(C(=O)N1S(=O)(=O)[O-])NC(=O)C(=NOC(C)(C)C(=O)O)c2csc(n2)[NH3+]	aztreonam	0
+6433735	CC(CCCC(C)(C)O)C1CCC2C1(CCCC2=CC=C3CC(CCC3=C)O)C	calcidiol	1
+6435893	CCC1C(=O)N(CC(=O)N(C(C(=O)NC(C(=O)N(C(C(=O)NC(C(=O)NC(C(=O)N(C(C(=O)N(C(C(=O)N(C(C(=O)N(C(C(=O)N1)C(C(C)CC=CC)O)C)C(C)C)C)CC(C)C)C)CC(C)C)C)C)C)CC(C)C)C)C(C)C)CC(C)C)C)C	cyclosporine	1
+9848818	CC(CCC(=O)NCCS(=O)(=O)O)C1CCC2C1(CCC3C2C(CC4C3(CCC(C4)O)C)O)C	tauroursodeoxycholic acid	1
+11044481	CCCCC(CC)COC(=O)C=Cc1ccc(cc1)OC	octylmethoxycinnamate	1
+54684459	CC1(c2c(ccc(c2C(=C3C1CC4C(C(=O)C(=C(C4(C3=O)O)O)C(=O)N)N(C)C)O)O)Cl)O.Cl	chlortetracycline hydrochloride	1
