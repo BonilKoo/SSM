@@ -29,7 +29,7 @@ class get_subgraph():
         self.test_molinfo_df  = pd.DataFrame()
 
     def read_model(self):
-        pretrained_file = open("../model/dilist_dili_train_Method2LRTrainEntropyUpdate_graph_rw7_alpha1_Pathrandom_PruneFalse_walkers5_iteration20.pickle", "rb")
+        pretrained_file = open("../model/ssm_trained.pickle", "rb")
         # argmax iter = 1
         self.trained = pickle.load(pretrained_file)
         print("Model loaded")
