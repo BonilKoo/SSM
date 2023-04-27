@@ -73,10 +73,11 @@ class PrepareData():
                     removed.append(diliid)
         #molinfo_df.reset_index(drop=True, inplace=True)
         molinfo_df.index = molinfo_df.Number
-        print(f'Molecules with no Random Walks allowed in Test Data:')
-        for i in removed:
-            smiles = data['smiles'][i]
-            print(f'\t{i}\t{smiles}')
+        if len(removed) != 0:
+            print(f'Molecules not allowed to Random Walks in Test Data:')
+            for i in removed:
+                smiles = data['smiles'][i]
+                print(f'\t{i}\t{smiles}')
         res_data = data[~data.index.isin(removed)]
         print(f'The shape of RW-allowed DILI molecules in Test Data: {res_data.shape}\n')
         return res_data, molinfo_df
@@ -99,10 +100,11 @@ class PrepareData():
                     removed.append(diliid)
         #molinfo_df.reset_index(drop=True, inplace=True)
         molinfo_df.index = molinfo_df.ID
-        print(f'Molecules with no Random Walks allowed in Training Data:')
-        for i in removed:
-            smiles = data['smiles'][i]
-            print(f'\t{i}\t{smiles}')
+        if len(removed) != 0:
+            print(f'Molecules not allowed to Random Walks in Training Data:')
+            for i in removed:
+                smiles = data['smiles'][i]
+                print(f'\t{i}\t{smiles}')
         res_data = data[~data.index.isin(removed)]
         print(f'The shape of RW-allowed DILI molecules in Training Data: {res_data.shape}\n')
         return res_data, molinfo_df

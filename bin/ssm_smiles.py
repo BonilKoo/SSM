@@ -47,7 +47,7 @@ class get_subgraph():
 def SSM_parser():
     parser = argparse.ArgumentParser(description = 'Supervised Subgraph Mining')
     parser.add_argument("--test_data", required=True, help="SMILES data (See test/short_test.tsv)", type=str)
-    parser.add_argument("--output_name", help="output filename. (Default directory: results/)", default='results/')
+    parser.add_argument("--output_dir", help="Path for output directory. (Default directory: ../results)", default='../../results')
 
     parser.add_argument('--rw', default=10, type=int, help='Length of random walks.')
     parser.add_argument('--alpha', default=0.9, type=float_range, help='Rate of updating graph transitions.')
@@ -59,8 +59,7 @@ def SSM_parser():
     return args
 
 def main():
-    mydir = os.getcwd() + "/"
-    print(f"Current working directory: {mydir}\n")
+    print(f"Current working directory: {os.getcwd()}\n")
     # Initialize and read trained model
     args = SSM_parser()
     # Load main SSM class
@@ -70,10 +69,10 @@ def main():
     # Run Supervised Subgraph Mining for the test data
     ssm.test = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
     ssm.test.valid(ssm.test_molinfo_df, ssm.train_molinfo_df, ssm.trained.dEdgeClassDict, ssm.trained.dFragSearch)
-    os.makedirs(args.output_name, exist_ok=True)
-    valid_archive = open(f'{args.output_name}.pickle', 'wb')
+    os.makedirs(args.output_dir, exist_ok=True)
+    valid_archive = open(f'{args.output_dir}/test.pickle', 'wb')
     pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
-    prediction(ssm.trained, ssm.test, ssm.iterations, args.output_name, ssm.train_molinfo_df, ssm.test_molinfo_df, args.output_name, mydir, ssm.nSeed)
+    prediction(ssm.trained, ssm.test, ssm.iterations, args.output_dir, ssm.train_molinfo_df, ssm.test_molinfo_df, ssm.nSeed)
 
 if __name__ == '__main__':
     main()

@@ -24,8 +24,8 @@ class DILInew:
         #
         self.dEdgeClassDict = {} # summary for class
         #
-        self.dMolTransDict  = defaultdict(dict) # key: iteration, value: {ltkbid_0:T_0, ltkbid_1:T_1, ..., ltkbid_N:T_N} 
-        self.dMolPreferDict = defaultdict(dict) # key: iteration, value: {ltkbid_0:F_0, ltkbid_1:F_1, ..., ltkbid_N:F_N} 
+        self.dMolTransDict  = defaultdict(dict) # key: iteration, value: {ltkbid_0:T_0, ltkbid_1:T_1, ..., ltkbid_N:T_N}
+        self.dMolPreferDict = defaultdict(dict) # key: iteration, value: {ltkbid_0:F_0, ltkbid_1:F_1, ..., ltkbid_N:F_N}
         self.dPreferDict = {} # key: iteration, value: Preference_iter
         #
         self.lexclusivefrags = defaultdict(list)
@@ -41,7 +41,7 @@ class DILInew:
         # dEdgeUsedCount: # of times edges used: {edge_1: 3, edge_2: 2, edge_3: 1, ...}
         # dEdgelistUsage: node: {node_list: [node_id, ..], edge_list: [edge_id, ..] }
         #                {0: {'node_list':[[0,1,2,,..], ..., []], 'edge_list': [['0_1', ...], ..., []]}
-        self.dNodeFragCount[n_iter][ltkbid], self.dNodeFragSmiles[n_iter][ltkbid]   = mychem.rw_getSmilesPathDict(mychem, self.molinfo_df["molobj"][ltkbid], self.dEdgelistUsage[n_iter][ltkbid]) 
+        self.dNodeFragCount[n_iter][ltkbid], self.dNodeFragSmiles[n_iter][ltkbid]   = mychem.rw_getSmilesPathDict(mychem, self.molinfo_df["molobj"][ltkbid], self.dEdgelistUsage[n_iter][ltkbid])
         # dNodeFragCount: {frag: 3, frag:1, ...}, dNodeFragSmiles = {node:frag, ... }
     # END of DoRandomWalk
     def cal_preference(self, n_it):
@@ -50,12 +50,12 @@ class DILInew:
             for edge in self.dEdgeUsedCount[n_it][ltkbid]:
                 a,b = list(map(int, edge.split('_') ))
                 frag = Chem.MolFragmentToSmiles(self.molinfo_df["molobj"][ltkbid], atomsToUse = [a, b])
-                try: 
+                try:
                     self.dEdgeClassDict[n_it][frag][nClass] += self.dEdgeUsedCount[n_it][ltkbid][edge]
-                except: 
-                    try: 
+                except:
+                    try:
                         self.dEdgeClassDict[n_it][frag][nClass] = self.dEdgeUsedCount[n_it][ltkbid][edge]
-                    except: 
+                    except:
                         self.dEdgeClassDict[n_it][frag] = {}
                         self.dEdgeClassDict[n_it][frag][nClass] = self.dEdgeUsedCount[n_it][ltkbid][edge]
     # END of cal_preference
@@ -69,9 +69,9 @@ class DILInew:
             if self.molinfo_df["molgraph"][ltkbid][n1][n2]['order'] != 0:
                 bond = self.molinfo_df["molobj"][ltkbid].GetBondBetweenAtoms(n1, n2).GetIdx()
                 frag_smi = Chem.MolFragmentToSmiles(self.molinfo_df["molobj"][ltkbid], atomsToUse = [n1, n2], bondsToUse = [bond])
-                try: 
-                    probSeries = n_iter_pref_df[frag_smi] / n_iter_pref_df.sum(axis=1) 
-                    F[n1, n2] = get_likelihood( probSeries ) 
+                try:
+                    probSeries = n_iter_pref_df[frag_smi] / n_iter_pref_df.sum(axis=1)
+                    F[n1, n2] = get_likelihood( probSeries )
                     F[n2, n1] = F[n1, n2]
                 except: F[n1, n2] = 0
         # normalize F
@@ -112,7 +112,7 @@ class DILInew:
     # END of search_fragments
     # START of DoPruning
     # MAIN HERE - argument: train_data
-    def train(self, train_data): 
+    def train(self, train_data):
         self.molinfo_df = train_data
         self.train_molinfo_df = train_data
         self.n_train = train_data.shape[0]
@@ -123,14 +123,14 @@ class DILInew:
             for ltkbid in self.molinfo_df["ID"]: # iterate over molecules
                 smiles = self.molinfo_df["smiles"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
-                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry) 
+                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry)
                 else:
                     pd_pref =  pd.DataFrame( self.dEdgeClassDict[nI-1], columns = self.dEdgeClassDict[nI-1].keys() ).fillna(0)
                     self.dMolPreferDict[nI-1][ltkbid] = self.get_individual_F(nI, pd_pref, ltkbid)
                     T = self.rw_update_transitions(self.dMolTransDict[nI-1][ltkbid], self.dMolPreferDict[nI-1][ltkbid], self.n_alpha) # T * (1-alpha) + F * alpha
                 self.dMolTransDict[nI][ltkbid] = T
                 self.DoRandomWalk(nI, ltkbid, T) # each molecule
-            self.dEdgeClassDict[nI] = {}   
+            self.dEdgeClassDict[nI] = {}
             self.cal_preference(nI) # Save Preference each iteration
             self.lexclusivefrags[nI], self.lunionfrags[nI] = self.get_fraglist(nI)
             fin = round( ( time.time() - start ) / 60 , 3 )
@@ -138,7 +138,7 @@ class DILInew:
         return self.dEdgeClassDict
     # END of train
     # MAIN HERE - argument: valid_data
-    def valid(self, valid_data, train_df, train_edgeclassdict, train_dFragSearch): 
+    def valid(self, valid_data, train_df, train_edgeclassdict, train_dFragSearch):
         self.molinfo_df = valid_data
         self.train_molinfo_df = train_df
         self.n_valid = valid_data.shape[0]
@@ -149,7 +149,7 @@ class DILInew:
             for ltkbid in self.molinfo_df.index: # iterate over molecules
                 smiles = self.molinfo_df["smiles"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
-                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry) 
+                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry)
                 else:
                     pd_pref =  pd.DataFrame( train_edgeclassdict[nI-1], columns = train_edgeclassdict[nI-1].keys() ).fillna(0)
                     self.dMolPreferDict[nI-1][ltkbid] = self.get_individual_F(nI, pd_pref, ltkbid, mode='test')
@@ -182,10 +182,10 @@ def prepare_classification(df, molinfo):
     df_new.index.name = None
     df_new = df_new.fillna(0)
     X = df_new.drop('class',axis=1)
-    y = df_new['class']    
+    y = df_new['class']
     return X, y
-            
-def prediction(train_obj, valid_obj, nIter, output_fname, train_molinfo_df, valid_molinfo_df, output_name, sOutDir, n_seed = 0): # train.pickle, test.pickle
+
+def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_molinfo_df, n_seed = 0): # train.pickle, test.pickle
 	print("Iteration: ", nIter)
 	pd_result =  pd.DataFrame( 0, index = range(nIter),  columns = ['n_union_subgraphs', 'n_train_subgraphs', 'n_valid_subgraphs', 'Accuracy', 'BAcc', 'Precision', 'Recall', 'F1_score', 'AUC', 'MCC'], dtype=np.float64)
 	pd_confusion = pd.DataFrame(0, index = range(nIter), columns = ["tn", "fp", "fn", "tp"])
@@ -216,6 +216,6 @@ def prediction(train_obj, valid_obj, nIter, output_fname, train_molinfo_df, vali
 		pd_output = valid_obj.molinfo_df.loc[:,['smiles']]
 		pd_output['probability'] = rf_preds.tolist()
 		pd_output['prediction'] = rf_probs.tolist()
-		fname = sOutDir + '../results/' + str(output_name) + '_predictions.tsv'
+		fname = f'{output_dir}/predictions.tsv'
 		pd_output.to_csv(fname, sep="\t")
 	# END of classification
