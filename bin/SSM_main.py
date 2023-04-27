@@ -3,7 +3,6 @@ import pandas as pd
 from collections import defaultdict
 from math import log
 from copy import deepcopy
-from collections import defaultdict
 from sklearn.ensemble import RandomForestClassifier as RFC
 from mychem import *
 

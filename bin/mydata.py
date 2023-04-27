@@ -25,18 +25,17 @@ class myobj():
         except: smiles = Chem.MolToSmiles(ChemMol, isomericSmiles=True, canonical=True)
         row['smiles'] = smiles
         return row
-    def read_data(self, test_fname=False, sPath = '.'):
-        print(f"Training Data: DILIst from (Chem Res Toxicol, 2021) )")
-        self.original_data = pd.read_csv(sPath + "../training_data/deepdili_dilist_train_all.tsv", sep="\t", header="infer")
+    def read_data(self, test_fname):
+        print(f"Training Data: DILIst from (Chem Res Toxicol, 2021)")
+        self.original_data = pd.read_csv("../training_data/deepdili_dilist_train_all.tsv", sep="\t", header="infer")
         self.original_data = self.original_data[~self.original_data["Canonical SMILES"].isna()]
         try:    self.train_df  = pd.DataFrame(self.original_data[["CID", "Canonical SMILES", "DILI_label"]])  # for others
         except: self.train_df  = pd.DataFrame(self.original_data[["Chemical name", "Canonical SMILES", "DILI_label"]])  # for Liew data
-        self.train_df.columns = ["CID", "smiles", "class"]
+        self.train_df.columns = ["CID", "smiles", "class"] # columns of training data
         # read test
-        print(f"Read Data: {test_fname}")
-        self.original_data = pd.read_csv(test_fname, sep="\t", header="infer") # ['index', 'name', 'smiles']
-        self.test_df            = self.original_data
-        self.test_df.columns    = ['Number', 'Compound_Name', 'smiles']
+        print(f"Read Test Data: {test_fname}")
+        self.test_df = pd.read_csv(test_fname, sep="\t", header="infer") # ['index', 'name', 'smiles']
+        self.test_df.columns    = ['Number', 'Compound_Name', 'smiles'] # columns of test data
         def run_sanitize(df):
             if self.sanitize:
                 df   = df.apply(self.sanitize_mols, axis=1)
@@ -52,17 +51,17 @@ class PrepareData():
         self.mydata          = myobj(sanitize=sanitize)
         self.mode            = mode
         self.train_df, self.test_df = defaultdict(pd.DataFrame), defaultdict(pd.DataFrame)
-    def read_data(self, test_fname, myPath = '.'):
-        self.train_df, self.test_df = self.mydata.read_data(test_fname = test_fname, sPath = myPath)
+    def read_data(self, test_fname):
+        self.train_df, self.test_df = self.mydata.read_data(test_fname = test_fname)
         print(f'Training Data shape: {self.train_df.shape}')
-        print(f'Test Data shape: {self.test_df.shape}')
+        print(f'Test Data shape: {self.test_df.shape}\n')
     def prepare_rw(self, data): # remove chemicals without edges
         molinfo_df = pd.DataFrame( columns = ["Number", "smiles", "molobj", "molgraph"])
         removed    = []
         for ind in data.index: # iterate over molecules
             smiles = data['smiles'][ind]
-            rdMol = Chem.MolFromSmiles(smiles)
-            nxMol = read_smiles(smiles, reinterpret_aromatic=True)
+            rdMol = Chem.MolFromSmiles(smiles) # rdkit.Chem.rdchem.Mol object
+            nxMol = read_smiles(smiles, reinterpret_aromatic=True) # networkx.classes.graph.Graph
             if ('.' in smiles):
                 removed.append(ind)
             else:
@@ -74,9 +73,11 @@ class PrepareData():
                     removed.append(diliid)
         #molinfo_df.reset_index(drop=True, inplace=True)
         molinfo_df.index = molinfo_df.Number
-        print(f'Molecules with no Random Walks allowed: {removed}')
+        print(f'Molecules with no Random Walks allowed in Test Data:')
+        for i in removed:
+            print(f'\t{i}\t{data['smiles'][i]}')
         res_data = data[~data.index.isin(removed)]
-        print(f'The shape of RW-allowed DILI molecules {res_data.shape}')
+        print(f'The shape of RW-allowed DILI molecules in Test Data: {res_data.shape}\n')
         return res_data, molinfo_df
 
     def prepare_rw_train(self, data): # remove chemicals without edges
@@ -84,8 +85,8 @@ class PrepareData():
         removed    = []
         for diliid in data.index: # iterate over molecules
             smiles = data['smiles'][diliid]
-            rdMol = Chem.MolFromSmiles(smiles)
-            nxMol = read_smiles(smiles, reinterpret_aromatic=True)
+            rdMol = Chem.MolFromSmiles(smiles) # rdkit.Chem.rdchem.Mol object
+            nxMol = read_smiles(smiles, reinterpret_aromatic=True) # networkx.classes.graph.Graph
             if ('.' in smiles):
                 removed.append(diliid)
             else:
@@ -97,7 +98,9 @@ class PrepareData():
                     removed.append(diliid)
         #molinfo_df.reset_index(drop=True, inplace=True)
         molinfo_df.index = molinfo_df.ID
-        print(f'Molecules with no Random Walks allowed: {removed}')
+        print(f'Molecules with no Random Walks allowed in Training Data:')
+        for i in removed:
+            print(f'\t{i}\t{data['smiles'][i]}')
         res_data = data[~data.index.isin(removed)]
-        print(f'The shape of RW-allowed DILI molecules {res_data.shape}')
+        print(f'The shape of RW-allowed DILI molecules in Training Data: {res_data.shape}\n')
         return res_data, molinfo_df
