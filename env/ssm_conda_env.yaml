@@ -1,4 +1,4 @@
-name: drug
+name: SSM
 channels:
   - anaconda
   - conda-forge
@@ -237,5 +237,3 @@ dependencies:
     - pyfingerprint==0.1.1
     - python-settings==0.2.2
     - xmltodict==0.12.0
-prefix: /data/project/sslim/miniconda3/envs/drug
-
