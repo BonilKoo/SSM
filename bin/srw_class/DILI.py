@@ -27,7 +27,8 @@ logging.getLogger('pysmiles').setLevel(logging.CRITICAL)  # Anything higher than
 
 # read class
 os.chdir('./srw_class')
-from set_device_seed import *   # seeding
+#from set_device_seed import *   # seeding
+from utils import *
 from mychem import *            # RW functions
 from mydata import *            # data
 
@@ -56,8 +57,8 @@ class DILInew():
         self.dEdgeClassDict = {} # summary for class
         #
         self.dNodeSubgraphCount = defaultdict(dict) # number of subgraphs to generate for each node in a graph; key: iteration {key: ltkbid, value: {node_1: n, node_2: n, ...}}
-        self.dMolTransDict  = defaultdict(dict) # key: iteration, value: {ltkbid_0:T_0, ltkbid_1:T_1, ..., ltkbid_N:T_N} 
-        self.dMolPreferDict = defaultdict(dict) # key: iteration, value: {ltkbid_0:F_0, ltkbid_1:F_1, ..., ltkbid_N:F_N} 
+        self.dMolTransDict  = defaultdict(dict) # key: iteration, value: {ltkbid_0:T_0, ltkbid_1:T_1, ..., ltkbid_N:T_N}
+        self.dMolPreferDict = defaultdict(dict) # key: iteration, value: {ltkbid_0:F_0, ltkbid_1:F_1, ..., ltkbid_N:F_N}
         self.dPreferDict = {} # key: iteration, value: Preference_iter
         self.dTrainLikelihood = {} # key: edge, 2nd key: iteration, value: ratio (tox/nontox)
         #
@@ -74,15 +75,15 @@ class DILInew():
         print(f"Transition mode: {self.rw_mode}, Pruning: {self.pruning}, Augmentation: {self.n_walkers}.")
         if get:
             return self.n_rw, self.n_alpha, self.chemistry, self.rw_mode, self.pruning, self.n_walkers
-        
+
     def cal_total_bond_count(self):
         # chop-off all the graphs into single bonds and count them in terms of DILI labels. (1:19684, 0:15233 for dilist:train)
-        self.dTotalBondCount = {i:float(sum([mol.GetNumBonds() for mol in self.molinfo_df.molobj[self.molinfo_df['class']==i]])) for i in self.molinfo_df['class'].unique()} 
-    
+        self.dTotalBondCount = {i:float(sum([mol.GetNumBonds() for mol in self.molinfo_df.molobj[self.molinfo_df['class']==i]])) for i in self.molinfo_df['class'].unique()}
+
     def normalize_preference(self, _nIteration):
         _newfreq = pd.DataFrame(self.dEdgeClassDict[_nIteration]).transpose().div(self.dTotalBondCount, axis=1)
         self.dEdgeClassDict[_nIteration] = _newfreq.div(_newfreq.sum(axis=1), axis=0).fillna(0)
-    
+
     def cal_nodeAttention(self, _nIter):
         for _molID in self.molinfo_df.index:
             nodelist = np.array(range(self.molinfo_df['molobj'][_molID].GetNumAtoms()))
@@ -107,7 +108,7 @@ class DILInew():
                     # print(_molID, edge_smiles, entropy_score) # done well
                     self.molinfo_df['molgraph'][_molID].edges[n1,n2]['edge_smarts'] = edge_smarts
                     try: self.molinfo_df['molgraph'][_molID].edges[n1,n2]['entropy_score'][_nIter] = entropy_score
-                    except: 
+                    except:
                         self.molinfo_df['molgraph'][_molID].edges[n1,n2]['entropy_score'] = {}
                         self.molinfo_df['molgraph'][_molID].edges[n1,n2]['entropy_score'][_nIter] = entropy_score
                 lMolAtomProbs = np.zeros(shape=self.molinfo_df["molobj"][_molID].GetNumAtoms())
@@ -157,10 +158,10 @@ class DILInew():
         # dEdgeUsedCount: # of times edges used: {edge_1: 3, edge_2: 2, edge_3: 1, ...}
         # dEdgelistUsage: node: {node_list: [node_id, ..], edge_list: [edge_id, ..] }
         #                {0: {'node_list':[[0,1,2,,..], ..., []], 'edge_list': [['0_1', ...], ..., []]}
-        self.dNodeFragCount[n_iter][ltkbid], self.dNodeFragSmiles[n_iter][ltkbid]   = mychem.rw_getSmilesPathDict(mychem, self.molinfo_df["molobj"][ltkbid], self.dEdgelistUsage[n_iter][ltkbid]) 
+        self.dNodeFragCount[n_iter][ltkbid], self.dNodeFragSmiles[n_iter][ltkbid]   = mychem.rw_getSmilesPathDict(mychem, self.molinfo_df["molobj"][ltkbid], self.dEdgelistUsage[n_iter][ltkbid])
         # dNodeFragCount: {frag: 3, frag:1, ...}, dNodeFragSmiles = {node:frag, ... }
     # END of DoRandomWalk
-    
+
     def cal_preference(self, n_it):
         for ltkbid in self.dEdgeUsedCount[n_it]:
             nClass = self.molinfo_df["class"][ltkbid]
@@ -168,12 +169,12 @@ class DILInew():
                 a,b = list(map(int, edge.split('_') ))
                 bond_id = self.molinfo_df['molobj'][ltkbid].GetBondBetweenAtoms(a,b).GetIdx()
                 frag = Chem.MolFragmentToSmarts(self.molinfo_df["molobj"][ltkbid], atomsToUse = [a, b], bondsToUse = [bond_id], isomericSmarts=True)
-                try: 
+                try:
                     self.dEdgeClassDict[n_it][frag][nClass] += self.dEdgeUsedCount[n_it][ltkbid][edge]
-                except: 
-                    try: 
+                except:
+                    try:
                         self.dEdgeClassDict[n_it][frag][nClass] = self.dEdgeUsedCount[n_it][ltkbid][edge]
-                    except: 
+                    except:
                         self.dEdgeClassDict[n_it][frag] = {}
                         self.dEdgeClassDict[n_it][frag][nClass] = self.dEdgeUsedCount[n_it][ltkbid][edge]
     # END of cal_preference
@@ -192,13 +193,13 @@ class DILInew():
             else: # train
                 try:
                     val = self.dTrainLikelihood[edge][n_iter]
-                except: 
+                except:
                     val = min( probs[1] / probs[0], 10)
                     try:    self.dTrainLikelihood[edge][n_iter] = val
                     except: self.dTrainLikelihood[edge] = {n_iter : val}
             return val
-        
-        # Method 2. 
+
+        # Method 2.
         def _get_likelihood(mySeries, mode): # class specific activation
             mySeries = pd.Series(mySeries)
             probs = mySeries / mySeries.sum() + 1e-10
@@ -213,7 +214,7 @@ class DILInew():
 #                 val = np.power(myval, len(j)) / ( np.prod(j) + 1e-8 )
             return val
 
-        # Method 3. 
+        # Method 3.
         def _get_entropy_transition(mySeries, mode): # class specific activation
             mySeries = pd.Series(mySeries)
             probs = mySeries / mySeries.sum() + 1e-10
@@ -241,7 +242,7 @@ class DILInew():
                 # frag_smi = Chem.MolFragmentToSmiles(self.molinfo_df["molobj"][ltkbid], atomsToUse = [n1, n2], bondsToUse = [bond])
                 frag_smi = Chem.MolFragmentToSmarts(self.molinfo_df['molobj'][ltkbid], atomsToUse = [n1, n2], bondsToUse = [bond], isomericSmarts = True)
                 try:
-                    try: probSeries = n_iter_pref_df[frag_smi] / n_iter_pref_df.sum(axis=1) 
+                    try: probSeries = n_iter_pref_df[frag_smi] / n_iter_pref_df.sum(axis=1)
                     except: probSeries = n_iter_pref_df.T[frag_smi] / n_iter_pref_df.sum(axis=1)
                     if method == 1:
                         F[n1, n2] = get_likelihood_ratio(frag_smi, probSeries, mode=mode) # Method 1
@@ -284,7 +285,7 @@ class DILInew():
         for ltkbid in self.train_molinfo_df["ID"]:
             if self.train_molinfo_df["molobj"][ltkbid].HasSubstructMatch(Chem.MolFromSmarts(sFrag), useChirality=True):
                 pdseries_search[self.train_molinfo_df["class"][ltkbid]] += 1
-        pdseries_search = pdseries_search.divide( self.train_molinfo_df.groupby("class")["ID"].count() + 1e-10 )	
+        pdseries_search = pdseries_search.divide( self.train_molinfo_df.groupby("class")["ID"].count() + 1e-10 )
         return pdseries_search
     # END of search_fragments
     # START of DoPruning
@@ -332,7 +333,7 @@ class DILInew():
             else: # test mode
                 try: ratio = (pdFragFreqClassNew[1]) / (pdFragFreqClassNew[0]) # class indication of train data
                 except ZeroDivisionError: ratio = 100
-            nOrgLR, nNewLR = np.log2(_nRatioOrg + 1e-10), np.log2(ratio + 1e-10) # Consistency test    
+            nOrgLR, nNewLR = np.log2(_nRatioOrg + 1e-10), np.log2(ratio + 1e-10) # Consistency test
             return (nEntNew < nEntOld) * (nOrgLR * nNewLR > 0)
         #
         # DoPruning Main starts here
@@ -366,12 +367,12 @@ class DILInew():
                     sFragNew, nEntropyNew, lPathListNew, pdFragFreqClassNew, nAtomsNew = deepcopy(sFragOrg), deepcopy(nEntropyOrg), deepcopy(lPathListOrg), deepcopy(pdFragFreqClassOrg), deepcopy(len(atomsOrg))
                     #
                     i_mod = 1
-                    while while_condition(nEntropyNew, nEntropyOld, ltkbid, pdFragFreqClassNew, nRatioOrg, method = pruning, mode=learnmode): # Designed to follow the consistent decrease in entropy 
+                    while while_condition(nEntropyNew, nEntropyOld, ltkbid, pdFragFreqClassNew, nRatioOrg, method = pruning, mode=learnmode): # Designed to follow the consistent decrease in entropy
                         # 0. initialize / update
                         atomsOld, bondsOld = deepcopy(atomsNew), deepcopy(bondsNew)
                         sFragOld, nEntropyOld, lPathListOld, pdFragFreqClassOld, nAtomsOld = deepcopy(sFragNew), deepcopy(nEntropyNew), deepcopy(lPathListNew), deepcopy(pdFragFreqClassNew), deepcopy(nAtomsNew)
                         dHistory[ltkbid][node][i_walker][i_mod] = [sFragOld, nEntropyOld, pdFragFreqClassOld]
-                        # 1. get subgraph information: 
+                        # 1. get subgraph information:
                         nxSubgraph = get_frag_subgraph(self.molinfo_df["molgraph"][ltkbid], lPathListOld)
                         if (len(nxSubgraph.edges()) == 1):
                             if (i_mod == 1):
@@ -394,7 +395,7 @@ class DILInew():
                             atoms, bonds = mychem.rw_getatombondlist( self.molinfo_df["molobj"][ltkbid], lPathList_i )
                             # try: sFrag_i  = Chem.MolFragmentToSmiles( self.molinfo_df["molobj"][ltkbid], atomsToUse = atoms, bondsToUse = bonds)
                             try: sFrag_i = Chem.MolFragmentToSmarts(self.molinfo_df['molobj'][ltkbid], atomsToUse = atoms, bondsToUse = bonds, isomericSmarts=True)
-                            except: 
+                            except:
                                 # sFrag_i = Chem.MolFragmentToSmiles(self.molinfo_df["molobj"][ltkbid], atomsToUse = atoms)
                                 sFrag_i = Chem.MolFragmentToSmarts(self.molinfo_df['molobj'][ltkbid], atomsToUse = atoms, isomericSmarts=True)
                                 print(f"Warning: (In pruning), there are missing edges in {self.molinfo_df['smiles'][ltkbid]} between atoms: {atoms}")
@@ -433,9 +434,9 @@ class DILInew():
                     if sFragOrg != sFragOld:
                         #     self.dSRW[nI]  =  [ dNodeFragSmiles, dNodeFragCount, dEdgeUsedCount, dEdgelistUsage ]
                         #     dNodeFragSmiles = {node:frag, ... }
-                        #     dNodeFragCount: {frag: 3, frag:1, ...}, 
+                        #     dNodeFragCount: {frag: 3, frag:1, ...},
                         #     dEdgeUsedCount: edge_id : used_count  ==  {0: 3, 1: 2, 2: 1, 3: 1, 4: 3, 5: 2, 7: 2, 8: 1}
-                        #     dEdgelistUsage: node: {node_list: [node_id, ..], edge_list: [edge_id, ..], usage: n_used/n_edges, nxpath_list=['1_2', '2_3', '3_4',...]} 
+                        #     dEdgelistUsage: node: {node_list: [node_id, ..], edge_list: [edge_id, ..], usage: n_used/n_edges, nxpath_list=['1_2', '2_3', '3_4',...]}
                         # 4. remove old (exclusive) fragment "Old tag"
                         self.dNodeFragSmiles[n_iter][ltkbid][node][i_walker] = sFragOld
                         self.dNodeFragCount[n_iter][ltkbid][sFragOrg] -= 1
@@ -456,9 +457,9 @@ class DILInew():
     #END of DoPruning
     # BEGIN of subgraph_split()
     # def subgraph_split(self, method=False):
-        
+
     # MAIN HERE - argument: train_duata
-    def train(self, train_data): 
+    def train(self, train_data):
         self.molinfo_df, self.train_molinfo_df = train_data, train_data
         self.n_train = train_data.shape[0]
         self.cal_total_bond_count()
@@ -472,13 +473,13 @@ class DILInew():
             for ltkbid in self.molinfo_df["ID"]: # iterate over molecules
                 smiles = self.molinfo_df["smiles"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
-                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry) 
+                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry)
                 else:
                     self.dMolPreferDict[nI-1][ltkbid] = self.get_individual_F(nI, pd_pref, ltkbid, method = self.update_method)
                     T = self.rw_update_transitions(self.dMolTransDict[nI-1][ltkbid], self.dMolPreferDict[nI-1][ltkbid], self.n_alpha) # T * (1-alpha) + F * alpha
                 self.dMolTransDict[nI][ltkbid] = T
                 self.DoRandomWalk(nI, ltkbid, T) # each molecule
-            self.dEdgeClassDict[nI] = {}   
+            self.dEdgeClassDict[nI] = {}
             self.cal_preference(nI) # dEdgeClassDict: Save Preference each iteration
             self.lexclusivefrags[nI], self.lunionfrags[nI] = self.get_fraglist(nI)
             if self.pruning:
@@ -495,7 +496,7 @@ class DILInew():
         return self.dEdgeClassDict
     # END of train
     # MAIN HERE - argument: valid_data
-    def valid(self, valid_df, train_df, train_obj): 
+    def valid(self, valid_df, train_df, train_obj):
         #### Read Train data
         self.molinfo_df = valid_df
         self.train_molinfo_df = train_df
@@ -512,9 +513,9 @@ class DILInew():
                 pd_pref =  pd.DataFrame( self.dEdgeClassDict[nI-1], columns = self.dEdgeClassDict[nI-1].keys() ).fillna(0).T # Load From train data
             for ltkbid in self.molinfo_df.index: # iterate over molecules
                 smiles = self.molinfo_df["smiles"][ltkbid]
-                if nI == 0: 
+                if nI == 0:
                     # cal_T(molobj, molgraph, smiles, chemistry='graph')
-                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry) 
+                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry)
                 else:
                     self.dMolPreferDict[nI-1][ltkbid] = self.get_individual_F(nI, pd_pref, ltkbid, method = self.update_method, mode='test')
                     T = self.rw_update_transitions(self.dMolTransDict[nI-1][ltkbid], self.dMolPreferDict[nI-1][ltkbid], self.n_alpha) # T * (1-alpha) + F * alpha
@@ -526,7 +527,7 @@ class DILInew():
             fin = round( ( time.time() - start ) / 60 , 3 )
             print(f' for Random Walk {self.n_rw} completed in {fin} mins.')
 
-            
+
 class analyze_individual():
     def __init__(self):
         self.frag_df = defaultdict(pd.DataFrame)
@@ -552,5 +553,5 @@ def prepare_classification(df, molinfo, binarize=False):
     df_new.index.name = None
     df_new = df_new.fillna(0)
     X = df_new.drop('class',axis=1)
-    y = df_new['class']    
+    y = df_new['class']
     return X, y

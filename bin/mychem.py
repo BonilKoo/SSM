@@ -109,9 +109,9 @@ class mychem():
     # END of rw_getatombondlist
 
     def cal_T(self, molobj, molgraph, smiles, chemistry="graph"):
-        A = np.array(nx.adj_matrix(molgraph).todense(), dtype = np.float64)
-        D = np.diag(np.sum(A, axis=0))
-        T = np.dot(np.linalg.inv(D),A) 
+        A = np.array(nx.adj_matrix(molgraph).todense(), dtype = np.float64) # adjacency matrix of graph
+        D = np.diag(np.sum(A, axis=0)) # degree matrix of graph
+        T = np.dot(np.linalg.inv(D),A)  # transition matrix of graph)
         if chemistry != "graph":
             encoding = self.featurize_atoms(self, molobj, smiles)
             for n1, n2 in zip(*T.nonzero()):

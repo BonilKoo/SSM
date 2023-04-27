@@ -142,10 +142,10 @@ class DILInew:
         self.molinfo_df = valid_data
         self.train_molinfo_df = train_df
         self.n_valid = valid_data.shape[0]
-        print(f'The Number of allowed walks: {self.n_rw}')
+        print(f'The Number of allowed walks: {self.n_rw}\n')
         for nI in range(self.n_iteration):  # iterate random walk process
             start = time.time()
-            print(nI, 'loop starts', end="")
+            print(f'{nI + 1} loop starts', end="")
             for ltkbid in self.molinfo_df.index: # iterate over molecules
                 smiles = self.molinfo_df["smiles"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
