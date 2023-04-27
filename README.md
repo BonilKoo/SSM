@@ -5,7 +5,7 @@ Supervised Subgraph Mining for Chemical Graphs
 
 
 # run
-python ssm_smiles.py --smiles_data ../test/short_test.tsv --output_name hello
+python ssm_smiles.py --test_data ../test/short_test.tsv --output_name hello
 
 # results
 1. hello.pickle
