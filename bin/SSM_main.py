@@ -125,7 +125,7 @@ class DILInew:
         print(f'Training\nThe Number of allowed walks: {self.n_rw}')
         for nI in range(self.n_iteration):  # iterate random walk process
             start = time.time()
-            print(f'Start loop {nI + 1} ----- ', end="")
+            print(f'Start iteration {nI + 1} ----- ', end="")
             for ltkbid in self.molinfo_df["ID"]: # iterate over molecules
                 smiles = self.molinfo_df["SMILES"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
@@ -152,7 +152,7 @@ class DILInew:
         print(f'Test\nThe Number of allowed walks: {self.n_rw}')
         for nI in range(self.n_iteration):  # iterate random walk process
             start = time.time()
-            print(f'Start loop {nI + 1} ----- ', end="")
+            print(f'Start iteration {nI + 1} ----- ', end="")
             for ltkbid in self.molinfo_df.index: # iterate over molecules
                 smiles = self.molinfo_df["SMILES"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
@@ -193,7 +193,7 @@ def prepare_classification(df, molinfo):
     return X, y
 
 def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_molinfo_df, n_seed = 0): # train.pickle, test.pickle
-	print(f"\nIteration: {nIter}")
+	print(f"\nTotal Iteration: {nIter}")
 	pd_result =  pd.DataFrame( 0, index = range(nIter),  columns = ['n_union_subgraphs', 'n_train_subgraphs', 'n_valid_subgraphs', 'Accuracy', 'BAcc', 'Precision', 'Recall', 'F1_score', 'AUC', 'MCC'], dtype=np.float64)
 	pd_confusion = pd.DataFrame(0, index = range(nIter), columns = ["tn", "fp", "fn", "tp"])
 	analyze_train = analyze_individual()
