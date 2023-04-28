@@ -119,7 +119,7 @@ class DILInew:
         print(f'The Number of allowed walks: {self.n_rw}')
         for nI in range(self.n_iteration):  # iterate random walk process
             start = time.time()
-            print(nI, 'loop starts', end="")
+            print(f'Loop {nI} starts ----- ', end="")
             for ltkbid in self.molinfo_df["ID"]: # iterate over molecules
                 smiles = self.molinfo_df["smiles"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
@@ -134,7 +134,7 @@ class DILInew:
             self.cal_preference(nI) # Save Preference each iteration
             self.lexclusivefrags[nI], self.lunionfrags[nI] = self.get_fraglist(nI)
             fin = round( ( time.time() - start ) / 60 , 3 )
-            print(f' for Random Walk {self.n_rw} completed in {fin} mins.')
+            print(f'Random Walk {self.n_rw} completed in {fin} mins.')
         return self.dEdgeClassDict
     # END of train
     # MAIN HERE - argument: valid_data
@@ -149,7 +149,7 @@ class DILInew:
             for ltkbid in self.molinfo_df.index: # iterate over molecules
                 smiles = self.molinfo_df["smiles"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
-                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry)
+                    T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry) # transition matrix
                 else:
                     pd_pref =  pd.DataFrame( train_edgeclassdict[nI-1], columns = train_edgeclassdict[nI-1].keys() ).fillna(0)
                     self.dMolPreferDict[nI-1][ltkbid] = self.get_individual_F(nI, pd_pref, ltkbid, mode='test')
@@ -164,11 +164,11 @@ class analyze_individual():
         self.frag_df = defaultdict(pd.DataFrame)
         self.lfraglist = defaultdict(list)
         self.ledgelist = defaultdict(list)
-    def get_frag_df(self, srw, iteration=0):
+    def get_frag_df(self, srw, iteration, set_type):
         self.frag_df[iteration] = pd.DataFrame(srw.dNodeFragCount[iteration], columns= srw.dNodeFragCount[iteration].keys())
         self.frag_df[iteration] = self.frag_df[iteration].fillna(0).T
         self.lfraglist[iteration] = list(set(self.frag_df[iteration].columns))
-        print(f'The number of fragments for iteration {iteration}: {len(self.lfraglist[iteration])}')
+        print(f'The number of fragments in {set_type} data for iteration {iteration + 1}: {len(self.lfraglist[iteration])}')
     def get_edge_df(self, iteration=0):
         self.ledgelist = list(set(self.dEdgeClassDict[iteration].keys()))
         print(f'The number of edges for iteration {iteration}: {len(self.ledgelist[iteration])}')
@@ -186,14 +186,14 @@ def prepare_classification(df, molinfo):
     return X, y
 
 def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_molinfo_df, n_seed = 0): # train.pickle, test.pickle
-	print("Iteration: ", nIter)
+	print(f"\nIteration: {nIter}")
 	pd_result =  pd.DataFrame( 0, index = range(nIter),  columns = ['n_union_subgraphs', 'n_train_subgraphs', 'n_valid_subgraphs', 'Accuracy', 'BAcc', 'Precision', 'Recall', 'F1_score', 'AUC', 'MCC'], dtype=np.float64)
 	pd_confusion = pd.DataFrame(0, index = range(nIter), columns = ["tn", "fp", "fn", "tp"])
 	analyze_train = analyze_individual()
 	analyze_valid = analyze_individual()
 	for nI in range(nIter):
-		analyze_train.get_frag_df(train_obj, iteration=nI)
-		analyze_valid.get_frag_df(valid_obj, iteration=nI)
+		analyze_train.get_frag_df(train_obj, iteration=nI, set_type='training')
+		analyze_valid.get_frag_df(valid_obj, iteration=nI, set_type='test')
 		train_mat = analyze_train.frag_df[nI]
 		valid_mat = analyze_valid.frag_df[nI]
 		# features
@@ -206,7 +206,7 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		train_X, train_y = prepare_classification(train_mat, train_molinfo_df)
 		valid_X = valid_mat
 	if (nI + 1) == nIter:
-		print("Subgraph matrix generation finished. Prediction starts.")
+		print("\nSubgraph matrix generation finished. Prediction starts.")
 		print(f'Training/validation data shape: {train_X.shape} / {valid_X.shape}')
 		# performance
 		smi_rf = RFC(random_state = n_seed) # seed number here
@@ -214,8 +214,9 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		rf_preds  = smi_rf.predict(valid_X)
 		rf_probs  = smi_rf.predict_proba(valid_X)[:,1]
 		pd_output = valid_obj.molinfo_df.loc[:,['smiles']]
-		pd_output['probability'] = rf_preds.tolist()
-		pd_output['prediction'] = rf_probs.tolist()
+		pd_output['prediction'] = rf_preds.tolist()
+		pd_output['probability'] = rf_probs.tolist()
 		fname = f'{output_dir}/predictions.tsv'
 		pd_output.to_csv(fname, sep="\t")
+		print(f'\nResult files are saved in {output_dir}.')
 	# END of classification

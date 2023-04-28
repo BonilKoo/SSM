@@ -62,6 +62,7 @@ def main():
     print(f"Current working directory: {os.getcwd()}\n")
     # Initialize and read trained model
     args = SSM_parser()
+    seed_everything(args.seed)
     # Load main SSM class
     ssm = get_subgraph(args)
     ssm.read_data(args.test_data)
@@ -70,7 +71,7 @@ def main():
     ssm.test = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
     ssm.test.valid(ssm.test_molinfo_df, ssm.train_molinfo_df, ssm.trained.dEdgeClassDict, ssm.trained.dFragSearch)
     os.makedirs(args.output_dir, exist_ok=True)
-    valid_archive = open(f'{args.output_dir}/test.pickle', 'wb')
+    valid_archive = open(f'{args.output_dir}/ssm.pickle', 'wb')
     pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
     prediction(ssm.trained, ssm.test, ssm.iterations, args.output_dir, ssm.train_molinfo_df, ssm.test_molinfo_df, ssm.nSeed)
 

@@ -111,7 +111,7 @@ class mychem():
     def cal_T(self, molobj, molgraph, smiles, chemistry="graph"):
         A = np.array(nx.adj_matrix(molgraph).todense(), dtype = np.float64) # adjacency matrix of graph
         D = np.diag(np.sum(A, axis=0)) # degree matrix of graph
-        T = np.dot(np.linalg.inv(D),A)  # transition matrix of graph)
+        T = np.dot(np.linalg.inv(D),A)  # transition matrix of graph
         if chemistry != "graph":
             encoding = self.featurize_atoms(self, molobj, smiles)
             for n1, n2 in zip(*T.nonzero()):
@@ -136,7 +136,7 @@ class mychem():
         pdPath = pd.DataFrame(0, columns=list(range(nNodes)), index=range(n_walker))
         pdPath = pdPath.rename_axis(index='walker', columns="atomID")
         def run_record(walkers):
-            visited = defaultdict(list)
+            visited = defaultdict(list) # keys -> node: int, value -> visited nodes: list
             for ind in range(nNodes):
                 z = np.zeros(nNodes)
                 p = z
