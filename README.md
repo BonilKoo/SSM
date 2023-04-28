@@ -8,5 +8,5 @@ Supervised Subgraph Mining for Chemical Graphs
 python ssm_smiles.py --test_data ../test/short_test.tsv --output_dir hello
 
 # results
-1. test.pickle
+1. ssm.pickle
 2. predictions.tsv
