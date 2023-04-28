@@ -1,8 +1,8 @@
 # Read Python libraries
 import os
-import argparse, pickle
+import argparse
+import pickle
 import pandas as pd
-# from collections import defaultdict
 
 # Read base class
 from mychem import *
@@ -28,15 +28,15 @@ class get_subgraph():
         self.test_df          = pd.DataFrame()
         self.test_molinfo_df  = pd.DataFrame()
 
-    def read_model(self):
-        pretrained_file = open("../model/ssm_trained.pickle", "rb")
+    def read_model(self, model_file):
+        pretrained_file = open(model_file, "rb")
         # argmax iter = 1
         self.trained = pickle.load(pretrained_file)
-        print("Model loaded\n")
+        print("\nTrained model loaded\n")
 
-    def read_data(self, data):
+    def read_data(self, train_data, test_data):
         my_data = PrepareData()
-        my_data.read_data(test_fname=data)
+        my_data.read_data(train_fname=train_data, test_fname=test_data)
         self.train_df = my_data.train_df
         self.test_df = my_data.test_df
         self.train_df, self.train_molinfo_df = my_data.prepare_rw_train(self.train_df)
@@ -46,8 +46,11 @@ class get_subgraph():
 # Read data
 def SSM_parser():
     parser = argparse.ArgumentParser(description = 'Supervised Subgraph Mining')
-    parser.add_argument("--test_data", required=True, help="SMILES data (See test/short_test.tsv)", type=str)
-    parser.add_argument("--output_dir", help="Path for output directory. (Default directory: ../results)", default='../../results')
+
+    parser.add_argument('--train_data', default=None, type=str, help='A tsv file for Training data. "SMILES" and "label" must be in the header. (Default: DILIst from (Chem Res Toxicol, 2021))')
+    parser.add_argument('--test_data', required=True, type=str, help='A tsv file for Test data. "SMILES" must be in the header. (See test/short_test.tsv)')
+    parser.add_argument('--output_dir', default='../../results', type=str, help="Path for output directory. (Default directory: ../results)")
+    parser.add_argument('--pretrained_file', default=None, type=str, help='A pickle file for pre-trained model. (See ../model/ssm_trained.pickle)')
 
     parser.add_argument('--rw', default=10, type=int, help='Length of random walks.')
     parser.add_argument('--alpha', default=0.9, type=float_range, help='Rate of updating graph transitions.')
@@ -60,18 +63,30 @@ def SSM_parser():
 
 def main():
     print(f"Current working directory: {os.getcwd()}\n")
+
     # Initialize and read trained model
     args = SSM_parser()
     seed_everything(args.seed)
+
     # Load main SSM class
     ssm = get_subgraph(args)
-    ssm.read_data(args.test_data)
-    ssm.read_model()
+    ssm.read_data(args.train_data, args.test_data)
+    os.makedirs(args.output_dir, exist_ok=True)
+
+    # Run Supervised Subgraph Mining for the training data
+    if args.pretrained_file is not None:
+        ssm.read_model(args.pretrained_file)
+    else:
+        ssm.train = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
+        ssm.train.train(ssm.train_molinfo_df)
+        train_archive = open(f'{args.output_dir}/ssm_train.pickle', 'wb')
+        pickle.dump(ssm.train, train_archive, pickle.HIGHEST_PROTOCOL)
+        ssm.read_model(f'{args.output_dir}/ssm_train.pickle')
+    
     # Run Supervised Subgraph Mining for the test data
     ssm.test = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
     ssm.test.valid(ssm.test_molinfo_df, ssm.train_molinfo_df, ssm.trained.dEdgeClassDict, ssm.trained.dFragSearch)
-    os.makedirs(args.output_dir, exist_ok=True)
-    valid_archive = open(f'{args.output_dir}/ssm.pickle', 'wb')
+    valid_archive = open(f'{args.output_dir}/ssm_test.pickle', 'wb')
     pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
     prediction(ssm.trained, ssm.test, ssm.iterations, args.output_dir, ssm.train_molinfo_df, ssm.test_molinfo_df, ssm.nSeed)
 

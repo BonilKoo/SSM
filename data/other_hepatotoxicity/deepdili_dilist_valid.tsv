@@ -1,4 +1,4 @@
-CID	Canonical SMILES	CompoundName	initial_approval_year	DILI_label
+CID	SMILES	CompoundName	initial_approval_year	label
 13505	CCOC(=O)C1(CCN(CCC(C#N)(c2ccccc2)c3ccccc3)CC1)c4ccccc4	DIPHENOXYLATE	1960	0
 3372	OCCN1CCN(CCCN2c3ccccc3Sc4ccc(cc24)C(F)(F)F)CC1	FLUPHENAZINE	1968	0
 564	NCCCCCC(=O)O	AMINOCAPROIC ACID	1964	0

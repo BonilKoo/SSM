@@ -1,4 +1,4 @@
-CID	Canonical SMILES	CompoundName	initial_approval_year	DILI_label
+CID	SMILES	CompoundName	initial_approval_year	label
 34359	C[C@@](Cc1ccc(O)c(O)c1)(NN)C(=O)O	CARBIDOPA	1975	0
 1935	Nc1c2CCCCc2nc3ccccc13	TACRINE	1993	1
 56330	CCOC(=O)[C@H](CCc1ccccc1)N[C@H]2CCCN3CCC[C@H](N3C2=O)C(=O)O	CILAZAPRIL	1993	1

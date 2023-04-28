@@ -44,6 +44,7 @@ class DILInew:
         self.dNodeFragCount[n_iter][ltkbid], self.dNodeFragSmiles[n_iter][ltkbid]   = mychem.rw_getSmilesPathDict(mychem, self.molinfo_df["molobj"][ltkbid], self.dEdgelistUsage[n_iter][ltkbid])
         # dNodeFragCount: {frag: 3, frag:1, ...}, dNodeFragSmiles = {node:frag, ... }
     # END of DoRandomWalk
+
     def cal_preference(self, n_it):
         for ltkbid in self.dEdgeUsedCount[n_it]:
             nClass = self.molinfo_df["class"][ltkbid]
@@ -59,6 +60,7 @@ class DILInew:
                         self.dEdgeClassDict[n_it][frag] = {}
                         self.dEdgeClassDict[n_it][frag][nClass] = self.dEdgeUsedCount[n_it][ltkbid][edge]
     # END of cal_preference
+
     def get_individual_F(self, n_iter, n_iter_pref_df, ltkbid, mode=False):
         def get_likelihood(mySeries):
             val = (mySeries[1] + 1e-8) / (mySeries[0] + 1e-8)
@@ -82,6 +84,7 @@ class DILInew:
         F = F.transpose()
         return F
     # END of get_individual_F
+
     def rw_update_transitions(self, _T, _F, update_alpha):
         _T = _T * (1-update_alpha) + update_alpha * _F
         for idx, row in enumerate(_T):
@@ -90,6 +93,7 @@ class DILInew:
         _T = _T.transpose()
         return _T
     # END of rw_update_transitions
+
     # START of get_fraglist
     def get_fraglist(self, n_iter):  # Get list of exclusive fragments
         #self.train_act_frag_df = pd.DataFrame(self.dNodeFragCount[n_iter], columns= self.dNodeFragCount[n_iter].keys())
@@ -102,6 +106,7 @@ class DILInew:
         lUnionList = nClassSpecificity[nClassSpecificity].index.to_list()
         return lExList, lUnionList
     # END of get_fraglist
+
     def search_fragments(self, sFrag):
         pdseries_search = pd.Series( 1e-10, index = self.train_molinfo_df['class'].unique(), name=sFrag)
         for ltkbid in self.train_molinfo_df["ID"]:
@@ -110,18 +115,19 @@ class DILInew:
         pdseries_search = pdseries_search.divide( self.train_molinfo_df.groupby("class")["ID"].count() + 1e-10 )
         return pdseries_search
     # END of search_fragments
+
     # START of DoPruning
     # MAIN HERE - argument: train_data
     def train(self, train_data):
         self.molinfo_df = train_data
         self.train_molinfo_df = train_data
         self.n_train = train_data.shape[0]
-        print(f'The Number of allowed walks: {self.n_rw}')
+        print(f'Training\nThe Number of allowed walks: {self.n_rw}')
         for nI in range(self.n_iteration):  # iterate random walk process
             start = time.time()
-            print(f'Loop {nI} starts ----- ', end="")
+            print(f'Start loop {nI + 1} ----- ', end="")
             for ltkbid in self.molinfo_df["ID"]: # iterate over molecules
-                smiles = self.molinfo_df["smiles"][ltkbid]
+                smiles = self.molinfo_df["SMILES"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
                     T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry)
                 else:
@@ -134,20 +140,21 @@ class DILInew:
             self.cal_preference(nI) # Save Preference each iteration
             self.lexclusivefrags[nI], self.lunionfrags[nI] = self.get_fraglist(nI)
             fin = round( ( time.time() - start ) / 60 , 3 )
-            print(f'Random Walk {self.n_rw} completed in {fin} mins.')
+            print(f'{self.n_rw} Random Walks completed in {fin} mins.')
         return self.dEdgeClassDict
     # END of train
+
     # MAIN HERE - argument: valid_data
     def valid(self, valid_data, train_df, train_edgeclassdict, train_dFragSearch):
         self.molinfo_df = valid_data
         self.train_molinfo_df = train_df
         self.n_valid = valid_data.shape[0]
-        print(f'The Number of allowed walks: {self.n_rw}\n')
+        print(f'Test\nThe Number of allowed walks: {self.n_rw}')
         for nI in range(self.n_iteration):  # iterate random walk process
             start = time.time()
-            print(f'{nI + 1} loop starts', end="")
+            print(f'Start loop {nI + 1} ----- ', end="")
             for ltkbid in self.molinfo_df.index: # iterate over molecules
-                smiles = self.molinfo_df["smiles"][ltkbid]
+                smiles = self.molinfo_df["SMILES"][ltkbid]
                 if nI == 0: # cal_T(molobj, molgraph, smiles, chemistry='graph')
                     T = mychem.cal_T(mychem, self.molinfo_df["molobj"][ltkbid], self.molinfo_df["molgraph"][ltkbid], smiles, chemistry = self.chemistry) # transition matrix
                 else:
@@ -157,7 +164,7 @@ class DILInew:
                 self.dMolTransDict[nI][ltkbid] = T
                 self.DoRandomWalk(nI, ltkbid, T) # each molecule
             fin = round( ( time.time() - start ) / 60 , 3 )
-            print(f' for Random Walk {self.n_rw} completed in {fin} mins.')
+            print(f'{self.n_rw} Random Walks completed in {fin} mins.')
 
 class analyze_individual():
     def __init__(self):
@@ -168,7 +175,7 @@ class analyze_individual():
         self.frag_df[iteration] = pd.DataFrame(srw.dNodeFragCount[iteration], columns= srw.dNodeFragCount[iteration].keys())
         self.frag_df[iteration] = self.frag_df[iteration].fillna(0).T
         self.lfraglist[iteration] = list(set(self.frag_df[iteration].columns))
-        print(f'The number of fragments in {set_type} data for iteration {iteration + 1}: {len(self.lfraglist[iteration])}')
+        print(f'The number of fragments in the {set_type} data during the iteration {iteration + 1}: {len(self.lfraglist[iteration])}')
     def get_edge_df(self, iteration=0):
         self.ledgelist = list(set(self.dEdgeClassDict[iteration].keys()))
         print(f'The number of edges for iteration {iteration}: {len(self.ledgelist[iteration])}')
@@ -206,14 +213,14 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		train_X, train_y = prepare_classification(train_mat, train_molinfo_df)
 		valid_X = valid_mat
 	if (nI + 1) == nIter:
-		print("\nSubgraph matrix generation finished. Prediction starts.")
-		print(f'Training/validation data shape: {train_X.shape} / {valid_X.shape}')
+		print("\nSubgraph matrix generation is finished. Start making predictios.")
+		print(f'Training/Test data shape: {train_X.shape} / {valid_X.shape}')
 		# performance
 		smi_rf = RFC(random_state = n_seed) # seed number here
 		smi_rf.fit(train_X, train_y)
 		rf_preds  = smi_rf.predict(valid_X)
 		rf_probs  = smi_rf.predict_proba(valid_X)[:,1]
-		pd_output = valid_obj.molinfo_df.loc[:,['smiles']]
+		pd_output = valid_obj.molinfo_df.loc[:,['SMILES']]
 		pd_output['prediction'] = rf_preds.tolist()
 		pd_output['probability'] = rf_probs.tolist()
 		fname = f'{output_dir}/predictions.tsv'
