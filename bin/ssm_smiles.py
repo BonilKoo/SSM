@@ -52,9 +52,9 @@ def SSM_parser():
     parser.add_argument('--output_dir', default='../../results', type=str, help="Path for output directory. (Default directory: ../results)")
     parser.add_argument('--pretrained_file', default=None, type=str, help='A pickle file for pre-trained model. (See ../model/ssm_trained.pickle)')
 
-    parser.add_argument('--rw', default=10, type=int, help='Length of random walks.')
-    parser.add_argument('--alpha', default=0.9, type=float_range, help='Rate of updating graph transitions.')
-    parser.add_argument('--iterations', default=1, type=int, help='Number of iterations.')
+    parser.add_argument('--rw', default=7, type=int, help='Length of random walks.')
+    parser.add_argument('--alpha', default=0.5, type=float_range, help='Rate of updating graph transitions.')
+    parser.add_argument('--iterations', default=20, type=int, help='Number of iterations.')
     parser.add_argument('--nWalker', default=5, type=int, help='Number of subgraphs for the augmentation.')
     parser.add_argument('--seed', default=0, type=int, help='Seed number for reproducibility.')
 
