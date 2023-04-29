@@ -48,9 +48,9 @@ python bin/ssm_smiles.py --test_data <test.tsv> \
 - `--seed`: seed number for reproducibility.
 
 ## Output files
-- `ssm_train.pickle`: a pickle file for training object
-- `ssm_test.pickle`: a pickle file for test object
-- `predictions_iteration_{n}.tsv`: a file for prediction result of test data
+- `ssm_train.pickle`: a pickle file for saving training object
+- `ssm_test.pickle`: a pickle file for saving test object
+- `predictions_iteration_{n}.tsv`: a file containing prediction result of test data for each iteration
 - `result.tsv`: a file containing performance of the model on test data
 - `confusion_matrix.tsv`: a file containing confusion matrix for the model on test data
 
