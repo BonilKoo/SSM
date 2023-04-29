@@ -245,7 +245,7 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		valid_X = valid_mat
 
 	# if (nI + 1) == nIter:
-		print("\nSubgraph matrix generation is finished. Start making predictios.")
+		print("Subgraph matrix generation is finished. Start making predictios.")
 		print(f'Training/Test data shape: {train_X.shape} / {valid_X.shape}')
 		# performance
 		smi_rf = RFC(random_state = n_seed) # seed number here

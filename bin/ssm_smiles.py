@@ -69,13 +69,12 @@ def main():
 
     # Initialize and read trained model
     args = SSM_parser()
-    seed_everything(args.seed)
 
     # Load main SSM class
     ssm = get_subgraph(args)
     os.makedirs(args.output_dir, exist_ok=True)
 
-    # Run Supervised Subgraph Mining for the training data
+    # Load trained model
     if args.trained_file is not None:
         ssm.read_model(args.trained_file)
         ssm.read_data(args.train_data, args.test_data, train=False)
@@ -88,9 +87,11 @@ def main():
         ssm.pruning = ssm.trained.pruning
         ssm.nWalker = ssm.trained.n_walkers
         ssm.sRule = ssm.trained.rw_mode
+    # Run Supervised Subgraph Mining for the training data
     else:
         ssm.read_data(args.train_data, args.test_data, train=True)
         ssm.train = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
+        seed_everything(args.seed)
         ssm.train.train(ssm.train_molinfo_df)
         train_archive = open(f'{args.output_dir}/ssm_train.pickle', 'wb')
         pickle.dump(ssm.train, train_archive, pickle.HIGHEST_PROTOCOL)
@@ -98,6 +99,7 @@ def main():
     
     # Run Supervised Subgraph Mining for the test data
     ssm.test = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
+    seed_everything(args.seed)
     ssm.test.valid(ssm.test_molinfo_df, ssm.train_molinfo_df, ssm.trained.dEdgeClassDict)#, ssm.trained.dFragSearch)
     valid_archive = open(f'{args.output_dir}/ssm_test.pickle', 'wb')
     pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
