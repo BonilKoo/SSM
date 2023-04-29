@@ -39,7 +39,10 @@ class get_subgraph():
         my_data.read_data(train_fname=train_data, test_fname=test_data, train=train)
         self.train_df = my_data.train_df
         self.test_df = my_data.test_df
-        self.train_df, self.train_molinfo_df = my_data.prepare_rw_train(self.train_df)
+        if train == True:
+            self.train_df, self.train_molinfo_df = my_data.prepare_rw_train(self.train_df)
+        else:
+            self.train_molinfo_df = self.trained.train_molinfo_df
         self.test_df, self.test_molinfo_df = my_data.prepare_rw(self.test_df)
         print("Data Preraparation Complete\n")
 
@@ -49,7 +52,7 @@ def SSM_parser():
 
     parser.add_argument('--train_data', default=None, type=str, help='A tsv file for Training data. "SMILES" and "label" must be included in the header. (Default: DILIst from (Chem Res Toxicol, 2021))')
     parser.add_argument('--test_data', required=True, type=str, help='A tsv file for Test data. "SMILES" must be included in the header. (See ../test/short_test.tsv)')
-    parser.add_argument('--output_dir', default='../results', type=str, help="Path for output directory. (Default directory: ../results)")
+    parser.add_argument('--output_dir', default='./results', type=str, help="Path for output directory.")
     parser.add_argument('--trained_file', default=None, type=str, help='A pickle file (ssm_trained.pickle) resulting from training the model.')
 
     parser.add_argument('--rw', '-l', default=7, type=int, help='Length of random walks. (l)')
@@ -74,8 +77,8 @@ def main():
 
     # Run Supervised Subgraph Mining for the training data
     if args.trained_file is not None:
-        ssm.read_data(args.train_data, args.test_data, train=False)
         ssm.read_model(args.trained_file)
+        ssm.read_data(args.train_data, args.test_data, train=False)
 
         print_changed_args(ssm.trained, ssm)
         ssm.chemistry = ssm.trained.chemistry

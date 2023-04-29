@@ -276,9 +276,9 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		pd_output.to_csv(fname, sep="\t")
 
 	if 'class' in valid_molinfo_df.columns:
-		    pd_result.columns.name = 'Iteration'
+		    pd_result.index.name = 'Iteration'
 		    pd_result.index = range(1, nIter+1)
-		    pd_confusion.columns.name = 'Iteration'
+		    pd_confusion.index.name = 'Iteration'
 		    pd_confusion.index = range(1, nIter+1)
 		    int_col = {'n_union_subgraphs': int, 'n_train_subgraphs': int, 'n_valid_subgraphs': int}
 		    pd_result = pd_result.astype(int_col)
