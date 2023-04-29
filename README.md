@@ -13,33 +13,46 @@ conda env create -f environment.yaml
 
 ### Training and Test
 ```
-python bin/ssm_smiles.py --train_data <train.tsv> --test_data <test.tsv> \
-            --output_dir <dir> \
-            --rw <rw> --alpha <alpha> \
-            --iterations <iterations> --nWalker <nWalker> \
-            --seed <seed>
+python bin/ssm_smiles.py --train_data <train.tsv> \
+                         --test_data <test.tsv> \
+                         --output_dir <dir> \
+                         --rw <rw> \
+                         --alpha <alpha> \
+                         --iterations <iterations> \
+                         --nWalker <nWalker> \
+                         --seed <seed>
 ```
 
 ### Test with a trained model
 ```
 python bin/ssm_smiles.py --test_data <test.tsv> \
-            --output_dir <dir> --trained_file model/ssm_trained.pickle \
-            --rw <rw> --alpha <alpha> \
-            --iterations <iterations> --nWalker <nWalker> \
-            --seed <seed>
+                         --output_dir <dir> \
+                         --trained_file model/ssm_trained.pickle \
+                         --rw <rw> \
+                         --alpha <alpha> \
+                         --iterations <iterations> \
+                         --nWalker <nWalker> \
+                         --seed <seed>
 ```
 
 *Options*
 
-- `--train_data`: A tsv file for Training data. "SMILES" and "label" must be included in the header. If you do not provide `train_data` to train the model, DILIstfrom (Chem Res Toxicol, 2021) will be used as training data.
-- `--test_data`: A tsv file for Test data. "SMILES" must be included in the header. If the header contains "label", the performance of the model is measured.
-- `--outpur_dir`: Path for output directory.
-- `--trained_file`: A pickle file (`ssm_trained.pickle`) resulting from training the model.
-- `--rw, -l`: Length of random walks. [default: 7]
-- `--alpha, -a`: Rate of updating graph transitions. [default: 0.1]
-- `--iterations, -k`: Number of iterations. [default: 20]
-- `--nWalker`: Number of subgraphs for the augmentation. [default: 5]
-- `--seed`: Seed number for reproducibility.
+- `--train_data`: a tsv file for Training data. "SMILES" and "label" must be included in the header. If you do not provide `train_data` to train the model, DILIstfrom (Chem Res Toxicol, 2021) will be used as training data.
+- `--test_data`: a tsv file for Test data. "SMILES" must be included in the header. If the header contains "label", the performance of the model is measured.
+- `--outpur_dir`: path for output directory.
+- `--trained_file`: a pickle file (`ssm_train.pickle`) resulting from training the model.
+- `--rw, -l`: length of random walks. [default: 7]
+- `--alpha, -a`: rate of updating graph transitions. [default: 0.1]
+- `--iterations, -k`: number of iterations. [default: 20]
+- `--nWalker`: number of subgraphs for the augmentation. [default: 5]
+- `--seed`: seed number for reproducibility.
+
+## Output files
+- `ssm_train.pickle`: a pickle file for training object
+- `ssm_test.pickle`: a pickle file for test object
+- `predictions_iteration_{n}.tsv`: a file for prediction result of test data
+- `result.tsv`: a file containing performance of the model on test data
+- `confusion_matrix.tsv`: a file containing confusion matrix for the model on test data
 
 ## Citation
 ```

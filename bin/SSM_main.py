@@ -280,6 +280,8 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		    pd_result.index = range(1, nIter+1)
 		    pd_confusion.columns.name = 'Iteration'
 		    pd_confusion.index = range(1, nIter+1)
+		    int_col = {'n_union_subgraphs': int, 'n_train_subgraphs': int, 'n_valid_subgraphs': int}
+		    pd_result = pd_result.astype(int_col)
 		    pd_result.to_csv(f'{output_dir}/result.tsv', sep='\t', float_format='%.3f')
 		    pd_confusion.to_csv(f'{output_dir}/confusion_matrix.tsv', sep='\t')
 
