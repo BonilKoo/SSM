@@ -29,14 +29,14 @@ class get_subgraph():
         self.test_molinfo_df  = pd.DataFrame()
 
     def read_model(self, model_file):
-        pretrained_file = open(model_file, "rb")
+        trained_file = open(model_file, "rb")
         # argmax iter = 1
-        self.trained = pickle.load(pretrained_file)
+        self.trained = pickle.load(trained_file)
         print("\nTrained model loaded\n")
 
-    def read_data(self, train_data, test_data):
+    def read_data(self, train_data, test_data, train=True):
         my_data = PrepareData()
-        my_data.read_data(train_fname=train_data, test_fname=test_data)
+        my_data.read_data(train_fname=train_data, test_fname=test_data, train=train)
         self.train_df = my_data.train_df
         self.test_df = my_data.test_df
         self.train_df, self.train_molinfo_df = my_data.prepare_rw_train(self.train_df)
@@ -47,15 +47,15 @@ class get_subgraph():
 def SSM_parser():
     parser = argparse.ArgumentParser(description = 'Supervised Subgraph Mining')
 
-    parser.add_argument('--train_data', default=None, type=str, help='A tsv file for Training data. "SMILES" and "label" must be in the header. (Default: DILIst from (Chem Res Toxicol, 2021))')
-    parser.add_argument('--test_data', required=True, type=str, help='A tsv file for Test data. "SMILES" must be in the header. (See test/short_test.tsv)')
-    parser.add_argument('--output_dir', default='../../results', type=str, help="Path for output directory. (Default directory: ../results)")
-    parser.add_argument('--pretrained_file', default=None, type=str, help='A pickle file for pre-trained model. (See ../model/ssm_trained.pickle)')
+    parser.add_argument('--train_data', default=None, type=str, help='A tsv file for Training data. "SMILES" and "label" must be included in the header. (Default: DILIst from (Chem Res Toxicol, 2021))')
+    parser.add_argument('--test_data', required=True, type=str, help='A tsv file for Test data. "SMILES" must be included in the header. (See ../test/short_test.tsv)')
+    parser.add_argument('--output_dir', default='../results', type=str, help="Path for output directory. (Default directory: ../results)")
+    parser.add_argument('--trained_file', default=None, type=str, help='A pickle file (ssm_trained.pickle) resulting from training the model.')
 
-    parser.add_argument('--rw', default=7, type=int, help='Length of random walks.')
-    parser.add_argument('--alpha', default=0.5, type=float_range, help='Rate of updating graph transitions.')
-    parser.add_argument('--iterations', default=20, type=int, help='Number of iterations.')
-    parser.add_argument('--nWalker', default=5, type=int, help='Number of subgraphs for the augmentation.')
+    parser.add_argument('--rw', '-l', default=7, type=int, help='Length of random walks. (l)')
+    parser.add_argument('--alpha', '-a', default=0.1, type=float_range, help='Rate of updating graph transitions. (α)')
+    parser.add_argument('--iterations', '-k', default=20, type=int, help='Number of iterations. (k)')
+    parser.add_argument('--nWalker',  default=5, type=int, help='Number of subgraphs for the augmentation. (h)')
     parser.add_argument('--seed', default=0, type=int, help='Seed number for reproducibility.')
 
     args = parser.parse_args()
@@ -70,13 +70,23 @@ def main():
 
     # Load main SSM class
     ssm = get_subgraph(args)
-    ssm.read_data(args.train_data, args.test_data)
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Run Supervised Subgraph Mining for the training data
-    if args.pretrained_file is not None:
-        ssm.read_model(args.pretrained_file)
+    if args.trained_file is not None:
+        ssm.read_data(args.train_data, args.test_data, train=False)
+        ssm.read_model(args.trained_file)
+
+        print_changed_args(ssm.trained, ssm)
+        ssm.chemistry = ssm.trained.chemistry
+        ssm.rw = ssm.trained.n_rw
+        ssm.alpha = ssm.trained.n_alpha
+        ssm.iterations = ssm.trained.n_iteration
+        ssm.pruning = ssm.trained.pruning
+        ssm.nWalker = ssm.trained.n_walkers
+        ssm.sRule = ssm.trained.rw_mode
     else:
+        ssm.read_data(args.train_data, args.test_data, train=True)
         ssm.train = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
         ssm.train.train(ssm.train_molinfo_df)
         train_archive = open(f'{args.output_dir}/ssm_train.pickle', 'wb')
@@ -85,7 +95,7 @@ def main():
     
     # Run Supervised Subgraph Mining for the test data
     ssm.test = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
-    ssm.test.valid(ssm.test_molinfo_df, ssm.train_molinfo_df, ssm.trained.dEdgeClassDict, ssm.trained.dFragSearch)
+    ssm.test.valid(ssm.test_molinfo_df, ssm.train_molinfo_df, ssm.trained.dEdgeClassDict)#, ssm.trained.dFragSearch)
     valid_archive = open(f'{args.output_dir}/ssm_test.pickle', 'wb')
     pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
     prediction(ssm.trained, ssm.test, ssm.iterations, args.output_dir, ssm.train_molinfo_df, ssm.test_molinfo_df, ssm.nSeed)
