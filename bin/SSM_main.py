@@ -6,6 +6,7 @@ from copy import deepcopy
 from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, matthews_corrcoef, confusion_matrix
 from mychem import *
+from utils import *
 
 class DILInew:
     def __init__(self, chemistry = 'graph', n_rw=10, n_alpha = 0.5, iteration = 10, pruning=False, n_walker=100, rw_mode = "argmax"):
@@ -217,9 +218,12 @@ def prepare_classification(df, molinfo):
     df_new = df_new.set_index("key_0", drop=True)
     df_new.index.name = None
     df_new = df_new.fillna(0)
+
+    df_entropy = cal_entropy_subgraph(df_new, 'Train')
+
     X = df_new.drop('class',axis=1)
     y = df_new['class']
-    return X, y
+    return X, y, df_entropy
 
 def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_molinfo_df, n_seed = 0): # train.pickle, test.pickle
 	print(f"\nTotal Iteration: {nIter}")
@@ -237,12 +241,18 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		# features
 		n_train = train_mat.shape[1]
 		n_valid = valid_mat.shape[1]
-		merged_mat = train_mat.append(valid_mat, sort=False).fillna(0)
+		# merged_mat = train_mat.append(valid_mat, sort=False).fillna(0)
+		merged_mat = pd.concat([train_mat, valid_mat], sort=False).fillna(0)
 		n_union = merged_mat.shape[1]
 		train_mat = merged_mat.iloc[:train_mat.shape[0], :n_train]
 		valid_mat = merged_mat.iloc[train_mat.shape[0]:, :n_train]
-		train_X, train_y = prepare_classification(train_mat, train_molinfo_df)
+		train_X, train_y, df_entropy_train = prepare_classification(train_mat, train_molinfo_df)
 		valid_X = valid_mat
+		if 'class' in valid_molinfo_df.columns:
+			df_entropy_valid = cal_entropy_subgraph(pd.concat([valid_mat, valid_molinfo_df['class']], axis=1), 'Valid')
+			df_entropy = pd.merge(df_entropy_train, df_entropy_valid, how='outer', left_index=True, right_index=True)
+		else:
+			df_entropy = df_entropy_train
 
 	# if (nI + 1) == nIter:
 		print("Subgraph matrix generation is finished. Start making predictios.")
@@ -250,6 +260,8 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		# performance
 		smi_rf = RFC(random_state = n_seed) # seed number here
 		smi_rf.fit(train_X, train_y)
+		df_entropy['Importance'] = smi_rf.feature_importances_
+		df_entropy = df_entropy.sort_values('Importance', ascending=False)
 		rf_preds  = smi_rf.predict(valid_X)
 		rf_probs  = smi_rf.predict_proba(valid_X)[:,1]
 
@@ -272,8 +284,14 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		pd_output = valid_obj.molinfo_df.loc[:,['SMILES']]
 		pd_output['prediction'] = rf_preds.tolist()
 		pd_output['probability'] = rf_probs.tolist()
-		fname = f'{output_dir}/predictions_iteration_{nI+1}.tsv'
+		os.makedirs(f'{output_dir}/iteration_{nI+1}', exist_ok=True)
+		fname = f'{output_dir}/iteration_{nI+1}/predictions.tsv'
 		pd_output.to_csv(fname, sep="\t")
+		df_entropy.to_csv(f'{output_dir}/iteration_{nI+1}/subgraph.tsv', sep='\t')
+		df_entropy_important = df_entropy[(df_entropy['Entropy (Train)'] < 0.5) & (df_entropy['Importance'] > 0.0001)]
+		df_entropy_important.to_csv(f'{output_dir}/iteration_{nI+1}/subgraph_important.tsv', sep='\t', float_format='%.3f')
+		df_SA = df_entropy_important[df_entropy_important['Support (Train); F_1'] > (df_entropy_important['Support (Train); F_0'] + 0.01)]
+		df_SA.to_csv(f'{output_dir}/iteration_{nI+1}/subgraph_SA.tsv', sep='\t', float_format='%.3f')
 
 	if 'class' in valid_molinfo_df.columns:
 		    pd_result.index.name = 'Iteration'

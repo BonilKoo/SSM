@@ -46,9 +46,12 @@ python bin/ssm_smiles.py --test_data <test.tsv> \
 ## Output files
 - `ssm_train.pickle`: a pickle file for saving training object
 - `ssm_test.pickle`: a pickle file for saving test object
-- `predictions_iteration_{n}.tsv`: a file containing prediction result of test data for each iteration
 - `result.tsv`: a file containing performance of the model on test data
 - `confusion_matrix.tsv`: a file containing confusion matrix for the model on test data
+- `iteration_{n}/predictions.tsv`: a file containing prediction result of test data for each iteration
+- `iteration_{n}/subgraph.tsv`: a file containing support, entropy and feature importance of each subgraph.
+- `iteration_{n}/subgraph_important.tsv`: a file containing subgraphs with "entropy < 0.5" and "feature importance" > 0.0001 in classification.
+- `iteration_{n}/subgraph_SA.tsv`: a file containing subgraphs of greater support in "class 1" than in "class 0" with more than "1% support".
 
 ## Citation
 ```
