@@ -28,10 +28,6 @@ python bin/ssm_smiles.py --train_data <train.tsv> \
 python bin/ssm_smiles.py --test_data <test.tsv> \
                          --output_dir <dir> \
                          --trained_file model/ssm_trained.pickle \
-                         --rw <rw> \
-                         --alpha <alpha> \
-                         --iterations <iterations> \
-                         --nWalker <nWalker> \
                          --seed <seed>
 ```
 
