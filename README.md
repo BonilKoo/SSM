@@ -41,7 +41,7 @@ python bin/ssm_smiles.py --test_data <test.tsv> \
 - `--alpha, -a`: rate of updating graph transitions. [default: 0.1]
 - `--iterations, -k`: number of iterations. [default: 20]
 - `--nWalker`: number of subgraphs for the augmentation. [default: 5]
-- `--seed`: seed number for reproducibility.
+- `--seed`: seed number for reproducibility. [default: 0]
 
 ## Output files
 - `ssm_train.pickle`: a pickle file for saving training object
