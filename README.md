@@ -33,7 +33,7 @@ python bin/ssm_smiles.py --test_data <test.tsv> \
 
 *Options*
 
-- `--train_data`: a tsv file for Training data. "SMILES" and "label" must be included in the header. If you do not provide `train_data` to train the model, DILIstfrom (Chem Res Toxicol, 2021) will be used as training data.
+- `--train_data`: a tsv file for Training data. "SMILES" and "label" must be included in the header. If you do not provide `train_data` to train the model, DILIst from (Chem Res Toxicol, 2021) will be used as training data.
 - `--test_data`: a tsv file for Test data. "SMILES" must be included in the header. If the header contains "label", the performance of the model is measured.
 - `--output_dir`: path for output directory.
 - `--trained_file`: a pickle file (`ssm_train.pickle`) resulting from training the model.
