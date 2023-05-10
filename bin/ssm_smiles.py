@@ -96,7 +96,7 @@ def main():
         train_archive = open(f'{args.output_dir}/ssm_train.pickle', 'wb')
         pickle.dump(ssm.train, train_archive, pickle.HIGHEST_PROTOCOL)
         ssm.read_model(f'{args.output_dir}/ssm_train.pickle')
-    
+
     # Run Supervised Subgraph Mining for the test data
     ssm.test = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
     seed_everything(args.seed)
