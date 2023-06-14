@@ -92,18 +92,12 @@ class PrepareData():
             else:
                 if nxMol.number_of_nodes() > 1:
                     if 'label' not in data.columns:
-#                         molinfo_df = molinfo_df.append( dict(zip(molinfo_df.columns.to_list(), 
-#                                                                     [ind, smiles, rdMol, nxMol ])), 
-#                                                                     ignore_index=True )
-                        molinfo_df = pd.concat([molinfo_df, dict(zip(molinfo_df.columns.to_list(), 
-                                                                    [ind, smiles, rdMol, nxMol ])),
+                        molinfo_df = molinfo_df.append( dict(zip(molinfo_df.columns.to_list(), 
+                                                                    [ind, smiles, rdMol, nxMol ])), 
                                                                     ignore_index=True )
                     else:
-#                         molinfo_df = molinfo_df.append( dict(zip(molinfo_df.columns.to_list(), 
-#                                                                     [ind, data['label'][ind], smiles, rdMol, nxMol ])), 
-#                                                                     ignore_index=True )
-                        molinfo_df = pd.concat([molinfo_df, dict(zip(molinfo_df.columns.to_list(), 
-                                                                    [ind, data['label'][ind], smiles, rdMol, nxMol ])),
+                        molinfo_df = molinfo_df.append( dict(zip(molinfo_df.columns.to_list(), 
+                                                                    [ind, data['label'][ind], smiles, rdMol, nxMol ])), 
                                                                     ignore_index=True )
                 else:
                     removed.append(diliid)
@@ -135,11 +129,8 @@ class PrepareData():
                 removed.append(diliid)
             else:
                 if nxMol.number_of_nodes() > 1:
-#                     molinfo_df = molinfo_df.append( dict(zip(molinfo_df.columns.to_list(), 
-#                                                                 [diliid, data['class'][diliid], smiles, rdMol, nxMol ])), 
-#                                                                 ignore_index=True )
-                    molinfo_df = pd.concat([molinfo_df, dict(zip(molinfo_df.columns.to_list(), 
-                                                                [diliid, data['class'][diliid], smiles, rdMol, nxMol ])),
+                    molinfo_df = molinfo_df.append( dict(zip(molinfo_df.columns.to_list(), 
+                                                                [diliid, data['class'][diliid], smiles, rdMol, nxMol ])), 
                                                                 ignore_index=True )
                 else:
                     removed.append(diliid)
