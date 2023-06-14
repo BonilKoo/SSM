@@ -1,18 +1,14 @@
-name: SSM2
+name: SSM
 channels:
-  - anaconda
   - conda-forge
-  - defaults
 dependencies:
   - ipython=8.7.0=pyh41d4057_0
-  - matplotlib=3.5.3=py39hf3d152e_2
   - numpy=1.24.2=py39h7360e5f_0
   - pandas=1.4.4=py39h1832856_0
   - pip=22.3.1=pyhd8ed1ab_0
   - python=3.9.15=hba424b6_0_cpython
-    #  - rdkit=2020.09.4=py37he53b9e1_0
   - scipy=1.8.1=py39hddc5342_3
-  - seaborn=0.11.2=hd8ed1ab_0
+  - tqdm=4.56.2=pyhd8ed1ab_0
   - pip:
       - networkx==2.8.8
       - pysmiles==1.0.2

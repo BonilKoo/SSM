@@ -20,15 +20,13 @@ python bin/ssm_smiles.py --train_data <train.tsv> \
                          --alpha <alpha> \
                          --iterations <iterations> \
                          --nWalker <nWalker> \
-                         --seed <seed>
 ```
 
 ### Test with a trained model
 ```
 python bin/ssm_smiles.py --test_data <test.tsv> \
                          --output_dir <dir> \
-                         --trained_file model/ssm_trained.pickle \
-                         --seed <seed>
+                         --trained_file model/ssm_train.pickle \
 ```
 
 *Options*
@@ -42,6 +40,7 @@ python bin/ssm_smiles.py --test_data <test.tsv> \
 - `--iterations, -k`: number of iterations. [default: 20]
 - `--nWalker`: number of subgraphs for the augmentation. [default: 5]
 - `--seed`: seed number for reproducibility. [default: 0]
+- `--DiSC`: mining discriminativ subgraph combinations (DiSCs) from subgraph features (condition: `significance < 0.1` & `support < 0.02`).
 
 ## Output files
 - `ssm_train.pickle`: a pickle file for saving training object.
@@ -52,6 +51,7 @@ python bin/ssm_smiles.py --test_data <test.tsv> \
 - `iteration_{n}/subgraph.tsv`: a file containing support, entropy and feature importance of each subgraph.
 - `iteration_{n}/subgraph_important.tsv`: a file containing subgraphs with "entropy < 0.5" and "feature importance > 0.0001" in classification.
 - `iteration_{n}/subgraph_SA.tsv`: a file containing subgraphs of greater support in "class 1" than in "class 0" with more than "1% support" among important subgraphs.
+- `iteration_{n}/DiSC.tsv`: a file containing DiSCs. If there is no DiSC that satisfies the conditions, no file is created.
 
 ## Citation
 ```

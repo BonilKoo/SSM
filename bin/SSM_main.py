@@ -8,6 +8,18 @@ from sklearn.metrics import accuracy_score, balanced_accuracy_score, precision_s
 from mychem import *
 from utils import *
 
+import sys
+import numpy as np
+import rdkit
+from rdkit import Chem
+from rdkit import RDLogger
+RDLogger.DisableLog('rdApp.*')
+from rdkit.Chem import rdDepictor
+rdDepictor.SetPreferCoordGen(True)
+from tqdm import tqdm
+from typing import Iterable
+from scipy import stats
+
 class DILInew:
     def __init__(self, chemistry = 'graph', n_rw=10, n_alpha = 0.5, iteration = 10, pruning=False, n_walker=100, rw_mode = "argmax"):
         self.chemistry, self.n_rw, self.n_alpha = chemistry, n_rw, n_alpha
@@ -139,7 +151,7 @@ class DILInew:
         self.molinfo_df = train_data
         self.train_molinfo_df = train_data
         self.n_train = train_data.shape[0]
-        print(f'Training...\nThe Number of allowed walks: {self.n_rw}')
+        print(f'Training...\nThe number of allowed walks: {self.n_rw}')
 
         for nI in range(self.n_iteration):  # iterate random walk process
             start = time.time()
@@ -172,7 +184,7 @@ class DILInew:
         self.molinfo_df = valid_data
         self.train_molinfo_df = train_df
         self.n_valid = valid_data.shape[0]
-        print(f'Test...\nThe Number of allowed walks: {self.n_rw}')
+        print(f'Test...\nThe number of allowed walks: {self.n_rw}')
 
         for nI in range(self.n_iteration):  # iterate random walk process
             start = time.time()
@@ -225,7 +237,7 @@ def prepare_classification(df, molinfo):
     y = df_new['class']
     return X, y, df_entropy
 
-def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_molinfo_df, n_seed = 0): # train.pickle, test.pickle
+def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_molinfo_df, n_seed = 0, DiSC=False): # train.pickle, test.pickle
 	print(f"\nTotal Iteration: {nIter}")
 	pd_result =  pd.DataFrame( 0, index = range(nIter),  columns = ['n_union_subgraphs', 'n_train_subgraphs', 'n_valid_subgraphs', 'Accuracy', 'BAcc', 'Precision', 'Recall', 'F1_score', 'AUC', 'MCC'], dtype=np.float64)
 	pd_confusion = pd.DataFrame(0, index = range(nIter), columns = ["tn", "fp", "fn", "tp"])
@@ -293,6 +305,11 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 		df_SA = df_entropy_important[df_entropy_important['Support (Train); F_1'] > (df_entropy_important['Support (Train); F_0'] + 0.01)]
 		df_SA.to_csv(f'{output_dir}/iteration_{nI+1}/subgraph_SA.tsv', sep='\t', float_format='%.3f')
 
+		if DiSC:
+			result_df = SMARTS_pattern_mining(valid_obj, train_X)
+			if result_df is not None:
+				result_df.to_csv(f'{output_dir}/iteration_{nI+1}/DiSC.tsv', sep='\t')
+
 	if 'class' in valid_molinfo_df.columns:
 		    pd_result.index.name = 'Iteration'
 		    pd_result.columns.name = 'Iteration'
@@ -307,3 +324,110 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
 
 	print(f'\nResult files are saved in {output_dir}.')
 	# END of classification
+
+def SMARTS_pattern_mining(valid_obj, train_X, k=2, epsilon=0.01, minimum_support_percent=2, minimum_entropy_cutoff=0.1):
+    '''Implemeted by Wonseok Shin (gratus907@snu.ac.kr)'''
+    minimum_support = train_X.shape[1] * minimum_support_percent / 100
+
+    train_labels = valid_obj.train_molinfo_df['class']
+    train_mols = valid_obj.train_molinfo_df['molobj']
+
+    def match(train_mols : Iterable[rdkit.Chem.rdchem.Mol], fragment : rdkit.Chem.rdchem.Mol):
+        return np.array([m.HasSubstructMatch(fragment) for m in train_mols])
+
+    fragment_set = np.array(train_X.columns)
+
+    fragment_set = list(map(lambda x : Chem.MolFromSmarts(x), fragment_set))
+    support_unique = dict()
+    for i, fragment in enumerate(tqdm(fragment_set)):
+        if np.count_nonzero(train_X.values[:, i]) > minimum_support:
+            to_tuple = tuple(np.bool_(train_X.values[:, i]))
+            if to_tuple not in support_unique:
+                support_unique[to_tuple] = fragment
+            else:
+                if support_unique[to_tuple].GetNumAtoms() > fragment.GetNumAtoms():
+                    support_unique[to_tuple] = fragment
+
+    fragment_set = list(support_unique.values())
+    print(f"\n{len(fragment_set)} fragments remained after support-drop")
+
+    num_pos, num_neg = (train_labels==1).sum(), (train_labels==0).sum()
+
+    def support(match_result):
+        pos_support = (((train_labels == 1)*(match_result==True))).sum()
+        neg_support = (((train_labels == 0)*(match_result==True))).sum()
+        return pos_support, neg_support
+
+    def entropy(match_result, return_support = False): # significance
+        pos_support, neg_support = support(match_result)
+        if pos_support + neg_support < minimum_support:
+            if return_support:
+                return 0, (pos_support, neg_support)
+            else: return 0
+        pos_ratio = (pos_support / num_pos) + epsilon
+        neg_ratio = (neg_support / num_neg) + epsilon
+        tot = pos_ratio + neg_ratio
+        pos_ratio /= tot
+        neg_ratio /= tot
+        if return_support:
+            return (1 + pos_ratio * np.log2(pos_ratio) + neg_ratio * np.log2(neg_ratio)), (pos_support, neg_support)
+        else: return (1 + pos_ratio * np.log2(pos_ratio) + neg_ratio * np.log2(neg_ratio))
+
+    def entropy_evaluate(smarts, return_support = False):
+        f = Chem.MolFromSmarts(smarts)
+        return entropy(match(train_mols, f), return_support)
+
+    fragment_smarts_set = list(map(lambda x : Chem.MolToSmarts(x), fragment_set))
+    fragment_with_smarts = [(a, b) for (a, b) in zip(fragment_set, fragment_smarts_set)]
+    maximum_num_atoms = max(list(map(lambda x : x.GetNumAtoms(), train_mols)))
+
+    entropy_scores = np.array([entropy_evaluate(b) for (a, b) in fragment_with_smarts])
+    iterate_count = 0
+    result_dict = {}
+    tqdm_progressbar = tqdm(total=len(fragment_with_smarts))
+    required_subset_len = k
+
+    def backtrack(A, subset, subset_index, index, current_ent):
+        nonlocal result_dict, iterate_count, required_subset_len
+        if len(subset) > required_subset_len: return
+        if len(subset) > 0:
+            current_smarts = ".".join([b for (a, b) in subset])
+            current_fragment = Chem.MolFromSmarts(current_smarts)
+            atom_cnt = current_fragment.GetNumAtoms()
+            if atom_cnt > maximum_num_atoms: return
+            ent = entropy_evaluate(current_smarts, return_support=True)
+            iterate_count += 1
+            tqdm_progressbar.set_postfix_str(f"Seen iteration : {iterate_count}")
+            if sum(ent[1]) < minimum_support: return
+            if len(subset) > 1 and ent[0] <= max(minimum_entropy_cutoff, current_ent, np.max(entropy_scores[subset_index])): return
+            current_ent = ent[0]
+            if len(subset) == required_subset_len:
+                result_dict[current_smarts] = ent
+                print(f"{iterate_count} {subset_index} : {current_smarts} Score = {ent}", flush=True)
+                if (iterate_count % 5000) == 0:
+                    print(f"{iterate_count} {subset_index} : {current_smarts} Score = {ent}", file=sys.stderr)
+        if len(subset) == 1:
+            tqdm_progressbar.update(1)
+            tqdm_progressbar.set_postfix_str(f"Seen iteration : {iterate_count}")
+        for i in range(index, len(A)):
+            subset.append(A[i])
+            subset_index.append(i)
+            backtrack(A, subset, subset_index, i + 1, current_ent)
+            subset.pop(-1)
+            subset_index.pop(-1)
+        return
+
+    subset, subset_index = [], []
+    index = 0
+    backtrack(fragment_with_smarts, subset, subset_index, index, 0.0)
+
+    if len(result_dict) == 0:
+        return None
+
+    result_df = pd.DataFrame(result_dict).T
+    result_df.columns = ['significance', 'support']
+    result_df[['support F_1', 'support F_0']] = pd.DataFrame(result_df['support'].to_list(), index=result_df.index) / (num_pos, num_neg)
+    result_df.drop(columns='support', inplace=True)
+    result_df.sort_values('significance', ascending=False, inplace=True)
+
+    return result_df

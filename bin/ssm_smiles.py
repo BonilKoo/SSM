@@ -61,11 +61,13 @@ def SSM_parser():
     parser.add_argument('--nWalker',  default=5, type=int, help='Number of subgraphs for the augmentation. (h)')
     parser.add_argument('--seed', default=0, type=int, help='Seed number for reproducibility.')
 
+    parser.add_argument('--DiSC', action='store_true')
+
     args = parser.parse_args()
     return args
 
 def main():
-    print(f"Current working directory: {os.getcwd()}\n")
+    print(f"\nCurrent working directory: {os.getcwd()}\n")
 
     # Initialize and read trained model
     args = SSM_parser()
@@ -103,7 +105,7 @@ def main():
     ssm.test.valid(ssm.test_molinfo_df, ssm.train_molinfo_df, ssm.trained.dEdgeClassDict)#, ssm.trained.dFragSearch)
     valid_archive = open(f'{args.output_dir}/ssm_test.pickle', 'wb')
     pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
-    prediction(ssm.trained, ssm.test, ssm.iterations, args.output_dir, ssm.train_molinfo_df, ssm.test_molinfo_df, ssm.nSeed)
+    prediction(ssm.trained, ssm.test, ssm.iterations, args.output_dir, ssm.train_molinfo_df, ssm.test_molinfo_df, ssm.nSeed, args.DiSC)
 
 if __name__ == '__main__':
     main()
