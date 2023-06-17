@@ -29,9 +29,11 @@ class get_subgraph():
         self.test_molinfo_df  = pd.DataFrame()
 
     def read_model(self, model_file):
-        trained_file = open(model_file, "rb")
+        # trained_file = open(model_file, "rb")
         # argmax iter = 1
-        self.trained = pickle.load(trained_file)
+        # self.trained = pickle.load(trained_file)
+        with open(model_file, 'rb') as trained_file:
+            self.trained = pickle.load(trained_file)
         print("\nTrained model loaded\n")
 
     def read_data(self, train_data, test_data, train=True):
@@ -95,16 +97,20 @@ def main():
         ssm.train = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
         seed_everything(args.seed)
         ssm.train.train(ssm.train_molinfo_df)
-        train_archive = open(f'{args.output_dir}/ssm_train.pickle', 'wb')
-        pickle.dump(ssm.train, train_archive, pickle.HIGHEST_PROTOCOL)
+        # train_archive = open(f'{args.output_dir}/ssm_train.pickle', 'wb')
+        # pickle.dump(ssm.train, train_archive, pickle.HIGHEST_PROTOCOL)
+        with open(f'{args.output_dir}/ssm_train.pickle', 'wb') as train_archive:
+            pickle.dump(ssm.train, train_archive, pickle.HIGHEST_PROTOCOL)
         ssm.read_model(f'{args.output_dir}/ssm_train.pickle')
 
     # Run Supervised Subgraph Mining for the test data
     ssm.test = DILInew(chemistry = ssm.chemistry, n_rw = ssm.rw, n_alpha = ssm.alpha, iteration = ssm.iterations, pruning = ssm.pruning, n_walker = ssm.nWalker , rw_mode = ssm.sRule)
     seed_everything(args.seed)
     ssm.test.valid(ssm.test_molinfo_df, ssm.train_molinfo_df, ssm.trained.dEdgeClassDict)#, ssm.trained.dFragSearch)
-    valid_archive = open(f'{args.output_dir}/ssm_test.pickle', 'wb')
-    pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
+    # valid_archive = open(f'{args.output_dir}/ssm_test.pickle', 'wb')
+    # pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
+    with open(f'{args.output_dir}/ssm_test.pickle', 'wb') as valid_archive:
+        pickle.dump(ssm.test, valid_archive, pickle.HIGHEST_PROTOCOL)
     prediction(ssm.trained, ssm.test, ssm.iterations, args.output_dir, ssm.train_molinfo_df, ssm.test_molinfo_df, ssm.nSeed, args.DiSC)
 
 if __name__ == '__main__':
