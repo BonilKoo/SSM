@@ -19,14 +19,14 @@ python bin/ssm_smiles.py --train_data <train.tsv> \
                          --rw <rw> \
                          --alpha <alpha> \
                          --iterations <iterations> \
-                         --nWalker <nWalker> \
+                         --nWalker <nWalker>
 ```
 
 ### Test with a trained model
 ```
 python bin/ssm_smiles.py --test_data <test.tsv> \
                          --output_dir <dir> \
-                         --trained_file model/ssm_train.pickle \
+                         --trained_file model/ssm_train.pickle
 ```
 
 *Options*
