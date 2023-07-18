@@ -40,7 +40,7 @@ python bin/ssm_smiles.py --test_data <test.tsv> \
 - `--iterations, -k`: number of iterations. [default: 20]
 - `--nWalker`: number of subgraphs for the augmentation. [default: 5]
 - `--seed`: seed number for reproducibility. [default: 0]
-- `--DiSC`: mining discriminativ subgraph combinations (DiSCs) from subgraph features (condition: `significance > 0.1` & `support > 0.02`).
+- `--DiSC`: mining discriminative subgraph combinations (DiSCs) from subgraph features (condition: `significance > 0.1` & `support > 0.02`).
 
 ## Output files
 - `ssm_train.pickle`: a pickle file for saving training object.

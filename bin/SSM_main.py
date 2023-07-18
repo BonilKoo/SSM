@@ -286,7 +286,7 @@ def prepare_classification(df, molinfo):
     return X, y, df_entropy
 
 
-def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_molinfo_df, n_seed=0, DiSC=False):  # train.pickle, test.pickle
+def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_molinfo_df, n_seed=0, DiSC=0):  # train.pickle, test.pickle
     print(f"\nTotal Iteration: {nIter}")
     pd_result = pd.DataFrame(0, index=range(nIter),  columns=[
                              'n_union_subgraphs', 'n_train_subgraphs', 'n_valid_subgraphs', 'Accuracy', 'BAcc', 'Precision', 'Recall', 'F1_score', 'AUC', 'MCC'], dtype=np.float64)
@@ -365,11 +365,12 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
         df_SA.to_csv(f'{output_dir}/iteration_{nI+1}/subgraph_SA.tsv',
                      sep='\t', float_format='%.3f')
 
-        if DiSC:
-            result_df = SMARTS_pattern_mining(valid_obj, train_X)
-            if result_df is not None:
-                result_df.to_csv(
-                    f'{output_dir}/iteration_{nI+1}/DiSC.tsv', sep='\t')
+        if DiSC not in [0, 1]:
+            for k in range(2, DiSC+1):
+                result_df = SMARTS_pattern_mining(valid_obj, train_X, k=k)
+                if result_df is not None:
+                    result_df.to_csv(
+                        f'{output_dir}/iteration_{nI+1}/DiSC_{k}.tsv', sep='\t')
 
     if 'class' in valid_molinfo_df.columns:
         pd_result.index.name = 'Iteration'
