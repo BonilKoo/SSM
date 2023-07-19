@@ -68,11 +68,8 @@ def SSM_parser():
     args = parser.parse_args()
     return args
 
-def main():
+def main(args):
     print(f"\nCurrent working directory: {os.getcwd()}\n")
-
-    # Initialize and read trained model
-    args = SSM_parser()
 
     # Load main SSM class
     ssm = get_subgraph(args)
@@ -114,4 +111,7 @@ def main():
     prediction(ssm.trained, ssm.test, ssm.iterations, args.output_dir, ssm.train_molinfo_df, ssm.test_molinfo_df, ssm.nSeed, args.DiSC)
 
 if __name__ == '__main__':
-    main()
+    # Initialize and read trained model
+    args = SSM_parser()
+
+    main(args)
