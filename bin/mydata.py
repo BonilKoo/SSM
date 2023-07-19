@@ -47,7 +47,7 @@ class myobj():
 
         # read test
         print(f"Test Data: {test_fname}")
-        self.test_df = pd.read_csv(test_fname, sep="\t", header="infer")
+        self.test_df = pd.read_csv(test_fname, header="infer")
         # self.test_df.columns    = ['Number', 'Compound_Name', 'smiles'] # columns of test data
 
         def run_sanitize(df):
