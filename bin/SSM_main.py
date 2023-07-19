@@ -381,7 +381,7 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
         int_col = {'n_union_subgraphs': int,
                    'n_train_subgraphs': int, 'n_valid_subgraphs': int}
         pd_result = pd_result.astype(int_col)
-        pd_result.to_csv(f'{output_dir}/result.csv', float_format='%.4f')
+        pd_result.to_csv(f'{output_dir}/performance.csv', float_format='%.4f')
         pd_confusion.to_csv(f'{output_dir}/confusion_matrix.csv')
 
     print(f'\nResult files are saved in {output_dir}.')
