@@ -35,7 +35,7 @@ class myobj():
     def read_data(self, train_fname, test_fname, train=True):
         if train_fname is None and train == True:
             print(f"Training Data: DILIst from (Chem Res Toxicol, 2021)")
-            self.original_data = pd.read_csv("training_data/deepdili_dilist_train_all.tsv", sep="\t", header="infer")
+            self.original_data = pd.read_csv("training_data/deepdili_dilist_train_all.csv", header="infer")
         elif train_fname is not None and train == True:
             print(f'Training Data: {train_fname}')
             self.original_data = pd.read_table(train_fname)

@@ -52,8 +52,8 @@ class get_subgraph():
 def SSM_parser():
     parser = argparse.ArgumentParser(description = 'Supervised Subgraph Mining')
 
-    parser.add_argument('--train_data', default=None, type=str, help='A tsv file for Training data. "SMILES" and "label" must be included in the header. (Default: DILIst from (Chem Res Toxicol, 2021))')
-    parser.add_argument('--test_data', required=True, type=str, help='A tsv file for Test data. "SMILES" must be included in the header. (See ../test/short_test.tsv)')
+    parser.add_argument('--train_data', default=None, type=str, help='A csv file for Training data. "SMILES" and "label" must be included in the header. (Default: DILIst from (Chem Res Toxicol, 2021))')
+    parser.add_argument('--test_data', required=True, type=str, help='A csv file for Test data. "SMILES" must be included in the header. (See ../test/short_test.csv)')
     parser.add_argument('--output_dir', default='./results', type=str, help="Path for output directory.")
     parser.add_argument('--trained_file', default=None, type=str, help='A pickle file (ssm_trained.pickle) resulting from training the model.')
 
