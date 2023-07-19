@@ -352,25 +352,24 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
         pd_output['prediction'] = rf_preds.tolist()
         pd_output['probability'] = rf_probs.tolist()
         os.makedirs(f'{output_dir}/iteration_{nI+1}', exist_ok=True)
-        fname = f'{output_dir}/iteration_{nI+1}/predictions.tsv'
-        pd_output.to_csv(fname, sep="\t")
+        fname = f'{output_dir}/iteration_{nI+1}/predictions.csv'
+        pd_output.to_csv(fname)
         df_entropy.to_csv(
-            f'{output_dir}/iteration_{nI+1}/subgraph.tsv', sep='\t')
+            f'{output_dir}/iteration_{nI+1}/subgraph.csv')
         df_entropy_important = df_entropy[(df_entropy['Entropy (Train)'] < 0.5) & (
             df_entropy['Importance'] > 0.0001)]
         df_entropy_important.to_csv(
-            f'{output_dir}/iteration_{nI+1}/subgraph_important.tsv', sep='\t', float_format='%.3f')
+            f'{output_dir}/iteration_{nI+1}/subgraph_important.csv', float_format='%.4f')
         df_SA = df_entropy_important[df_entropy_important['Support (Train); F_1'] > (
             df_entropy_important['Support (Train); F_0'] + 0.01)]
-        df_SA.to_csv(f'{output_dir}/iteration_{nI+1}/subgraph_SA.tsv',
-                     sep='\t', float_format='%.3f')
+        df_SA.to_csv(f'{output_dir}/iteration_{nI+1}/subgraph_SA.csv', float_format='%.4f')
 
         if DiSC not in [0, 1]:
             for k in range(2, DiSC+1):
                 result_df = SMARTS_pattern_mining(valid_obj, train_X, k=k)
                 if result_df is not None:
                     result_df.to_csv(
-                        f'{output_dir}/iteration_{nI+1}/DiSC_{k}.tsv', sep='\t')
+                        f'{output_dir}/iteration_{nI+1}/DiSC_{k}.csv', float_format='%.4f')
 
     if 'class' in valid_molinfo_df.columns:
         pd_result.index.name = 'Iteration'
@@ -382,9 +381,8 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
         int_col = {'n_union_subgraphs': int,
                    'n_train_subgraphs': int, 'n_valid_subgraphs': int}
         pd_result = pd_result.astype(int_col)
-        pd_result.to_csv(f'{output_dir}/result.tsv',
-                         sep='\t', float_format='%.3f')
-        pd_confusion.to_csv(f'{output_dir}/confusion_matrix.tsv', sep='\t')
+        pd_result.to_csv(f'{output_dir}/result.csv', float_format='%.4f')
+        pd_confusion.to_csv(f'{output_dir}/confusion_matrix.csv')
 
     print(f'\nResult files are saved in {output_dir}.')
     # END of classification
