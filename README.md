@@ -13,8 +13,8 @@ conda env create -f environment.yaml
 
 ### Training and Test
 ```
-python bin/ssm_smiles.py --train_data <train.tsv> \
-                         --test_data <test.tsv> \
+python bin/ssm_smiles.py --train_data <train.csv> \
+                         --test_data <test.csv> \
                          --output_dir <dir> \
                          --rw <rw> \
                          --alpha <alpha> \
@@ -24,15 +24,15 @@ python bin/ssm_smiles.py --train_data <train.tsv> \
 
 ### Test with a trained model
 ```
-python bin/ssm_smiles.py --test_data <test.tsv> \
+python bin/ssm_smiles.py --test_data <test.csv> \
                          --output_dir <dir> \
                          --trained_file model/ssm_train.pickle
 ```
 
 *Options*
 
-- `--train_data`: a tsv file for Training data. "SMILES" and "label" must be included in the header. If you do not provide `train_data` to train the model, DILIst from (Chem Res Toxicol, 2021) will be used as training data.
-- `--test_data`: a tsv file for Test data. "SMILES" must be included in the header. If the header contains "label", the performance of the model is measured.
+- `--train_data`: a csv file for Training data. "SMILES" and "label" must be included in the header. If you do not provide `train_data` to train the model, DILIst from (Chem Res Toxicol, 2021) will be used as training data.
+- `--test_data`: a csv file for Test data. "SMILES" must be included in the header. If the header contains "label", the performance of the model is measured.
 - `--output_dir`: path for output directory.
 - `--trained_file`: a pickle file (`ssm_train.pickle`) resulting from training the model.
 - `--rw, -l`: length of random walks. [default: 7]
