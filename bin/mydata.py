@@ -38,7 +38,7 @@ class myobj():
             self.original_data = pd.read_csv("training_data/deepdili_dilist_train_all.csv", header="infer")
         elif train_fname is not None and train == True:
             print(f'Training Data: {train_fname}')
-            self.original_data = pd.read_table(train_fname)
+            self.original_data = pd.read_csv(train_fname)
         
         if train == True:
             self.original_data = self.original_data[~self.original_data["SMILES"].isna()]
