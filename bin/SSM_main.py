@@ -368,6 +368,7 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
             for k in range(2, DiSC+1):
                 result_df = SMARTS_pattern_mining(valid_obj, train_X, k=k)
                 if result_df is not None:
+                    result_df.index.name = 'DiSC'
                     result_df.to_csv(
                         f'{output_dir}/iteration_{nI+1}/DiSC_{k}.csv', float_format='%.4f')
 
@@ -381,6 +382,7 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
         int_col = {'n_union_subgraphs': int,
                    'n_train_subgraphs': int, 'n_valid_subgraphs': int}
         pd_result = pd_result.astype(int_col)
+        pd_result.index.name = 'iteration'
         pd_result.to_csv(f'{output_dir}/performance.csv', float_format='%.4f')
         pd_confusion.to_csv(f'{output_dir}/confusion_matrix.csv')
 

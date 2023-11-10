@@ -63,7 +63,7 @@ def SSM_parser():
     parser.add_argument('--nWalker',  default=5, type=int, help='Number of subgraphs for the augmentation. (h)')
     parser.add_argument('--seed', default=0, type=int, help='Seed number for reproducibility.')
 
-    parser.add_argument('--DiSC', default=0, type=int, help='Maximum length of substructure for mining DiSC')
+    parser.add_argument('--DiSC', default=3, type=int, help='Maximum length of substructure for mining DiSC')
 
     args = parser.parse_args()
     return args
