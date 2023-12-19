@@ -102,7 +102,8 @@ class PrepareData():
                                                                     [ind, data['label'][ind], smiles, rdMol, nxMol ])),
                                                                     ignore_index=True )
                 else:
-                    removed.append(diliid)
+#                     removed.append(diliid)
+                    removed.append(ind)
 
         #molinfo_df.reset_index(drop=True, inplace=True)
         molinfo_df.index = molinfo_df.Number
