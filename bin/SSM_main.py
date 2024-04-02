@@ -339,7 +339,10 @@ def prediction(train_obj, valid_obj, nIter, output_dir, train_molinfo_df, valid_
             precision = precision_score(rf_true, rf_preds)
             recall = recall_score(rf_true, rf_preds)
             f1 = f1_score(rf_true, rf_preds)
-            roc_auc = roc_auc_score(rf_true, rf_probs)
+            try:
+                roc_auc = roc_auc_score(rf_true, rf_probs)
+            except ValueError:
+                roc_auc = np.nan
             mcc = matthews_corrcoef(rf_true, rf_preds)
             confusion_mat = confusion_matrix(rf_true, rf_preds).ravel()
 
